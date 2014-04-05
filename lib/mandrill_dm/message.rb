@@ -6,6 +6,10 @@ module MandrillDm
       @mail = mail
     end
 
+    def bcc_address
+      @mail.header["bcc_address"].to_s
+    end
+
     def from_email
       from.address
     end
@@ -16,6 +20,10 @@ module MandrillDm
 
     def html
       @mail.html_part ? @mail.html_part.body.decoded : @mail.body.decoded
+    end
+
+    def subaccount
+      @mail.header["subaccount"].to_s
     end
 
     def subject

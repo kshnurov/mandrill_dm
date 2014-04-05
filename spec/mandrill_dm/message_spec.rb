@@ -60,14 +60,6 @@ describe MandrillDm::Message do
     end
   end
 
-  describe '#subject' do
-    it 'takes a subject' do
-      mail = mail(subject: 'Test Subject')
-      message = described_class.new(mail)
-      expect(message.subject).to eq('Test Subject')
-    end
-  end
-
   describe '#text' do
     it 'does not take a non-multipart message' do
       mail = mail(to: 'name@domain.tld', body: 'Hello world!')
@@ -142,6 +134,56 @@ describe MandrillDm::Message do
       )
     end
   end
+
+  describe '#subject' do
+    it 'takes a subject' do
+      mail = mail(subject: 'Test Subject')
+      message = described_class.new(mail)
+      expect(message.subject).to eq('Test Subject')
+    end
+  end
+
+  pending '#headers'
+  pending '#important'
+  pending '#track_opens'
+  pending '#track_clicks'
+  pending '#auto_text'
+  pending '#auto_html'
+  pending '#inline_css'
+  pending '#url_strip_qs'
+  pending '#preserve_recipients'
+  pending '#view_content_link'
+
+  describe  '#bcc_address' do
+    it 'takes a bcc_address' do
+      mail = mail(bcc_address: 'bart@simpsons.com')
+      message = described_class.new(mail)
+      expect(message.bcc_address).to eq('bart@simpsons.com')
+    end
+  end
+
+  pending '#tracking_domain'
+  pending '#signing_domain'
+  pending '#return_path_domain'
+  pending '#merge'
+  pending '#global_merge_vars'
+  pending '#merge_vars'
+  pending '#tags'
+
+  describe '#subaccount' do
+    it 'takes a subaccount' do
+      mail = mail(subaccount: 'abc123')
+      message = described_class.new(mail)
+      expect(message.subaccount).to eq('abc123')
+    end
+  end
+
+  pending '#google_analytics_domains'
+  pending '#google_analytics_campaign'
+  pending '#metadata'
+  pending '#recipient_metadata'
+  pending '#attachments'
+  pending '#images'
 
   describe "#to_json" do
     it "returns a proper JSON response for the Mandrill API" do

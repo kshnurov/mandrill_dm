@@ -7,7 +7,7 @@ Use Mandrill DM to use ActionMailer with the Mandrill API. Perfect for transitio
 First, add the gem to your Gemfile and run the `bundle` command to install it.
 
 ```ruby
-gem 'mandrill_dm', git: "git://github.com/jlberglund/mandrill_dm.git"
+gem 'mandrill_dm'
 ```
 
 Second, set the delivery method in `config/environments/production.rb`.

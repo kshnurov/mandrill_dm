@@ -8,9 +8,10 @@ describe MandrillDm::DeliveryMethod do
   end
 
   context 'api' do
+    let(:mandrill_response) { [{ "_id" => "mandrill_response_id" }] }
     before(:each) do
       @api = double('Mandrill::API')
-      @api.stub_chain(:messages, :send).and_return({})
+      @api.stub_chain(:messages, :send).and_return(mandrill_response)
     end
 
     it 'gets instantiated' do
@@ -34,6 +35,18 @@ describe MandrillDm::DeliveryMethod do
           bcc 'name@domain.tld'
         end
       }.not_to raise_error
+    end
+
+    it "store mandrill response to Mail::Message" do
+      Mandrill::API.stub(:new).and_return(@api)
+      mail = Mail.deliver do
+        from 'John Doe <name@domain.tld>'
+        body 'Hello world!'
+        subject 'A Test'
+        to 'name@domain.tld'
+        bcc 'name@domain.tld'
+      end
+      expect(mail.mandrill_response).to eq(mandrill_response)
     end
   end
 end

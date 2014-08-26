@@ -40,6 +40,10 @@ module MandrillDm
       combine_address_fields.reject{|h| h.nil?}.flatten
     end
 
+    def has_attachment?
+      @mail.attachments.any?
+    end
+
     # Returns a Mandrill API compatible attachment hash
     def attachments
       return nil unless @mail.attachments.any?
@@ -54,15 +58,15 @@ module MandrillDm
     end
 
     def to_json
-      {
+      json_hash = {
         html: html,
         text: text,
         subject: subject,
         from_email: from_email,
         from_name: from_name,
-        to: to,
-        attachments: attachments
+        to: to
       }
+      has_attachment? ? json_hash.merge(attachments: attachments) : json_hash
     end
 
     private

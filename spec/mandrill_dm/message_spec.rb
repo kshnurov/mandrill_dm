@@ -188,7 +188,6 @@ describe MandrillDm::Message do
       mail = mail(to: 'name@domain.tld', content_type: 'multipart/alternative')
       mail.attachments['text.txt'] = { mime_type: 'text/plain', content: 'This is a test' }
       message = described_class.new(mail)
-
       expect(message.attachments).to eq([{ name: 'text.txt', type: 'text/plain', content: "VGhpcyBpcyBhIHRlc3Q=\n" }])
     end
   end
@@ -198,6 +197,13 @@ describe MandrillDm::Message do
   describe "#to_json" do
     it "returns a proper JSON response for the Mandrill API" do
       mail = mail(body: 'test', from: 'name@domain.tld')
+      message = described_class.new(mail)
+      expect(message.to_json).to include(:from_email, :from_name, :html, :subject, :to)
+    end
+
+    it "returns a proper JSON response for the Mandrill API with attachments" do
+      mail = mail(body: 'test', from: 'name@domain.tld')
+      mail.attachments['text.txt'] = { mime_type: 'text/plain', content: 'This is a test' }
       message = described_class.new(mail)
       expect(message.to_json).to include(:from_email, :from_name, :html, :subject, :to, :attachments)
     end

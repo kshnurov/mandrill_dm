@@ -56,6 +56,11 @@ module MandrillDm
 
     private
 
+    # Returns an array of tags
+    def collect_tags
+      @mail[:tags].to_s.split(', ').map { |tag| tag }
+    end
+
     # Returns a single, flattened hash with all to, cc, and bcc addresses
     def combine_address_fields
       %w[to cc bcc].map do |field|
@@ -81,10 +86,6 @@ module MandrillDm
           type: address_field.name.downcase
         }
       end
-    end
-
-    def collect_tags
-      @mail[:tags].to_s.split(', ').map { |tag| tag }
     end
   end
 end

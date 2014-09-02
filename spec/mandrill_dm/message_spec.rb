@@ -168,7 +168,20 @@ describe MandrillDm::Message do
   pending '#merge'
   pending '#global_merge_vars'
   pending '#merge_vars'
-  pending '#tags'
+
+  describe '#tags' do
+    it 'takes a tag' do
+      mail = mail(tags: 'test_tag')
+      message = described_class.new(mail)
+      expect(message.tags).to eq(['test_tag'])
+    end
+
+    it 'takes an array of tags' do
+      mail = mail(tags: ['test_tag1', 'test_tag2'])
+      message = described_class.new(mail)
+      expect(message.tags).to eq(['test_tag1', 'test_tag2'])
+    end
+  end
 
   describe '#subaccount' do
     it 'takes a subaccount' do
@@ -187,9 +200,9 @@ describe MandrillDm::Message do
 
   describe "#to_json" do
     it "returns a proper JSON response for the Mandrill API" do
-      mail = mail(body: 'test', from: 'name@domain.tld')
+      mail = mail(body: 'test', from: 'name@domain.tld', tags: 'test_tag')
       message = described_class.new(mail)
-      expect(message.to_json).to include(:from_email, :from_name, :html, :subject, :to)
+      expect(message.to_json).to include(:from_email, :from_name, :html, :subject, :to, :tags)
     end
   end
 end

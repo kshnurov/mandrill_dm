@@ -30,6 +30,10 @@ module MandrillDm
       @mail.subject
     end
 
+    def tags
+      collect_tags
+    end
+
     def text
       @mail.multipart? ? (@mail.text_part ? @mail.text_part.body.decoded : nil) : nil
     end
@@ -45,7 +49,8 @@ module MandrillDm
         subject: subject,
         from_email: from_email,
         from_name: from_name,
-        to: to
+        to: to,
+        tags: tags
       }
     end
 
@@ -76,6 +81,10 @@ module MandrillDm
           type: address_field.name.downcase
         }
       end
+    end
+
+    def collect_tags
+      @mail[:tags].to_s.split(', ').map { |tag| tag }
     end
   end
 end

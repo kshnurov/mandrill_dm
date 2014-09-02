@@ -18,6 +18,10 @@ module MandrillDm
       from.display_name
     end
 
+    def headers
+      combine_extra_header_fields
+    end
+
     def html
       @mail.html_part ? @mail.html_part.body.decoded : @mail.body.decoded
     end
@@ -50,6 +54,7 @@ module MandrillDm
         from_email: from_email,
         from_name: from_name,
         to: to,
+        headers: headers,
         tags: tags
       }
     end
@@ -66,6 +71,29 @@ module MandrillDm
       %w[to cc bcc].map do |field|
         hash_addresses(@mail[field])
       end
+    end
+
+    # Returns a hash of extra headers (not complete)
+    def combine_extra_header_fields
+      headers = {}
+      %w[Reply-To
+         X-MC-Track
+         X-MC-GoogleAnalytics
+         X-MC-GoogleAnalyticsCampaign
+         X-MC-URLStripQS
+         X-MC-PreserveRecipients
+         X-MC-InlineCSS
+         X-MC-TrackingDomain
+         X-MC-SigningDomain
+         X-MC-Subaccount
+         X-MC-ViewContentLink
+         X-MC-BccAddress
+         X-MC-Important
+         X-MC-IpPool
+         X-MC-ReturnPathDomain].each do |field|
+        headers[field] = @mail[field].to_s if @mail[field]
+      end
+      headers
     end
 
     # Returns a Mail::Address object using the from field

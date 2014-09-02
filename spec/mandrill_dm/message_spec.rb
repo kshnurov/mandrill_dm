@@ -143,7 +143,26 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#headers'
+  describe '#headers' do
+    it 'takes an extra header' do
+      mail = mail(headers: {'Reply-To' => 'name1@domain.tld'})
+      message = described_class.new(mail)
+      expect(message.headers).to eq({'Reply-To' => 'name1@domain.tld'})
+    end
+
+    it 'takes more extra headers' do
+      mail = mail(headers: {'Reply-To' => 'name1@domain.tld', 'X-MC-Track' => 'opens, clicks_htmlonly', 'X-MC-URLStripQS' => 'true'})
+      message = described_class.new(mail)
+      expect(message.headers).to eq(
+        {
+          'Reply-To' => 'name1@domain.tld',
+          'X-MC-Track' => 'opens, clicks_htmlonly',
+          'X-MC-URLStripQS' => 'true'
+        }
+      )
+    end
+  end
+
   pending '#important'
   pending '#track_opens'
   pending '#track_clicks'
@@ -200,9 +219,9 @@ describe MandrillDm::Message do
 
   describe "#to_json" do
     it "returns a proper JSON response for the Mandrill API" do
-      mail = mail(body: 'test', from: 'name@domain.tld', tags: 'test_tag')
+      mail = mail(body: 'test', from: 'name@domain.tld', headers: {'Reply-To' => 'name1@domain.tld'}, tags: 'test_tag')
       message = described_class.new(mail)
-      expect(message.to_json).to include(:from_email, :from_name, :html, :subject, :to, :tags)
+      expect(message.to_json).to include(:from_email, :from_name, :html, :subject, :to, :headers, :tags)
     end
   end
 end

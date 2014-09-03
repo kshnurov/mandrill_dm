@@ -150,6 +150,12 @@ describe MandrillDm::Message do
       expect(message.headers).to eq({'Reply-To' => 'name1@domain.tld'})
     end
 
+    it 'takes an extra header with reply_to' do
+      mail = mail(reply_to: 'name1@domain.tld')
+      message = described_class.new(mail)
+      expect(message.headers).to eq({'Reply-To' => 'name1@domain.tld'})
+    end
+
     it 'takes more extra headers' do
       mail = mail(headers: {'Reply-To' => 'name1@domain.tld', 'X-MC-Track' => 'opens, clicks_htmlonly', 'X-MC-URLStripQS' => 'true'})
       message = described_class.new(mail)

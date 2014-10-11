@@ -67,11 +67,11 @@ module MandrillDm
     end
 
     def track_clicks
-      @mail[:track_clicks].nil? ? nil : (@mail[:track_clicks].to_s == "true" ? true : false)
+      nil_true_false?(:track_clicks)
     end
 
     def track_opens
-      @mail[:track_opens].nil? ? nil : (@mail[:track_opens].to_s == "true" ? true : false)
+      nil_true_false?(:track_opens)
     end
 
     private
@@ -129,6 +129,10 @@ module MandrillDm
           type: address_field.name.downcase
         }
       end
+    end
+
+    def nil_true_false?(field)
+      @mail[field].nil? ? nil : (@mail[field].to_s == "true" ? true : false)
     end
   end
 end

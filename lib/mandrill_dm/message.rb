@@ -60,8 +60,18 @@ module MandrillDm
         to: to,
         headers: headers,
         important: important,
+        track_opens: track_opens,
+        track_clicks: track_clicks,
         tags: tags
       }
+    end
+
+    def track_clicks
+      @mail[:track_clicks].nil? ? nil : (@mail[:track_clicks].to_s == "true" ? true : false)
+    end
+
+    def track_opens
+      @mail[:track_opens].nil? ? nil : (@mail[:track_opens].to_s == "true" ? true : false)
     end
 
     private

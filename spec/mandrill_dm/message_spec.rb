@@ -189,8 +189,46 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#track_opens'
-  pending '#track_clicks'
+  describe '#track_opens' do
+    it 'takes a track_opens with true' do
+      mail = mail(track_opens: true)
+      message = described_class.new(mail)
+      expect(message.track_opens).to be true
+    end
+
+    it 'takes a track_opens with false' do
+      mail = mail(track_opens: false)
+      message = described_class.new(mail)
+      expect(message.track_opens).to be false
+    end
+
+    it 'does not take a track_opens value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.track_opens).to be_nil
+    end
+  end
+
+  describe '#track_clicks' do
+    it 'takes a track_clicks with true' do
+      mail = mail(track_clicks: true)
+      message = described_class.new(mail)
+      expect(message.track_clicks).to be true
+    end
+
+    it 'takes a track_clicks with false' do
+      mail = mail(track_clicks: false)
+      message = described_class.new(mail)
+      expect(message.track_clicks).to be false
+    end
+
+    it 'does not take a track_clicks value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.track_clicks).to be_nil
+    end
+  end
+
   pending '#auto_text'
   pending '#auto_html'
   pending '#inline_css'

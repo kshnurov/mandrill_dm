@@ -26,6 +26,10 @@ module MandrillDm
       @mail.html_part ? @mail.html_part.body.decoded : @mail.body.decoded
     end
 
+    def important
+      @mail[:important].to_s == "true" ? true : false
+    end
+
     def subaccount
       @mail.header["subaccount"].to_s
     end
@@ -55,6 +59,7 @@ module MandrillDm
         from_name: from_name,
         to: to,
         headers: headers,
+        important: important,
         tags: tags
       }
     end

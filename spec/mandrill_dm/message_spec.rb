@@ -169,7 +169,26 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#important'
+  describe '#important' do
+    it 'takes an important email' do
+      mail = mail(important: true)
+      message = described_class.new(mail)
+      expect(message.important).to be true
+    end
+
+    it 'takes a non important email' do
+      mail = mail(important: false)
+      message = described_class.new(mail)
+      expect(message.important).to be false
+    end
+
+    it 'takes a default important value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.important).to be false
+    end
+  end
+
   pending '#track_opens'
   pending '#track_clicks'
   pending '#auto_text'

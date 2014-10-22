@@ -6,6 +6,14 @@ module MandrillDm
       @mail = mail
     end
 
+    def auto_text
+      nil_true_false?(:auto_text)
+    end
+
+    def auto_html
+      nil_true_false?(:auto_html)
+    end
+
     def bcc_address
       @mail.header["bcc_address"].to_s
     end
@@ -62,6 +70,8 @@ module MandrillDm
         important: important,
         track_opens: track_opens,
         track_clicks: track_clicks,
+        auto_text: auto_text,
+        auto_html: auto_html,
         tags: tags
       }
     end

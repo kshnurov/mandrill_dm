@@ -229,8 +229,46 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#auto_text'
-  pending '#auto_html'
+  describe '#auto_text' do
+    it 'takes a auto_text with true' do
+      mail = mail(auto_text: true)
+      message = described_class.new(mail)
+      expect(message.auto_text).to be true
+    end
+
+    it 'takes a auto_text with false' do
+      mail = mail(auto_text: false)
+      message = described_class.new(mail)
+      expect(message.auto_text).to be false
+    end
+
+    it 'does not take an auto_text value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.auto_text).to be_nil
+    end
+  end
+
+  describe '#auto_html' do
+    it 'takes a auto_html with true' do
+      mail = mail(auto_html: true)
+      message = described_class.new(mail)
+      expect(message.auto_html).to be true
+    end
+
+    it 'takes a auto_html with false' do
+      mail = mail(auto_html: false)
+      message = described_class.new(mail)
+      expect(message.auto_html).to be false
+    end
+
+    it 'does not take an auto_html value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.auto_html).to be_nil
+    end
+  end
+
   pending '#inline_css'
   pending '#url_strip_qs'
   pending '#preserve_recipients'

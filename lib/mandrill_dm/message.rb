@@ -84,6 +84,7 @@ module MandrillDm
         url_strip_qs: url_strip_qs,
         preserve_recipients: preserve_recipients,
         view_content_link: view_content_link,
+        tracking_domain: tracking_domain,
         tags: tags
       }
     end
@@ -94,6 +95,10 @@ module MandrillDm
 
     def track_opens
       nil_true_false?(:track_opens)
+    end
+
+    def tracking_domain
+      @mail[:tracking_domain] ? @mail[:tracking_domain].to_s : nil
     end
 
     def url_strip_qs

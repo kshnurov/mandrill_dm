@@ -357,7 +357,20 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#tracking_domain'
+  describe '#tracking_domain' do
+    it 'takes a tracking_domain' do
+      mail = mail(tracking_domain: 'tracking_domain.com')
+      message = described_class.new(mail)
+      expect(message.tracking_domain).to eq('tracking_domain.com')
+    end
+
+    it 'does not take tracking_domain value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.tracking_domain).to be_nil
+    end
+  end
+
   pending '#signing_domain'
   pending '#return_path_domain'
   pending '#merge'

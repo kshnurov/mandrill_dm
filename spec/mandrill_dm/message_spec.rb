@@ -289,7 +289,26 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#url_strip_qs'
+  describe '#url_strip_qs'do
+    it 'takes a url_strip_qs with true' do
+      mail = mail(url_strip_qs: true)
+      message = described_class.new(mail)
+      expect(message.url_strip_qs).to be true
+    end
+
+    it 'takes a url_strip_qs with false' do
+      mail = mail(url_strip_qs: false)
+      message = described_class.new(mail)
+      expect(message.url_strip_qs).to be false
+    end
+
+    it 'does not take an url_strip_qs value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.url_strip_qs).to be_nil
+    end
+  end
+
   pending '#preserve_recipients'
   pending '#view_content_link'
 

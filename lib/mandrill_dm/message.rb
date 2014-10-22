@@ -77,6 +77,7 @@ module MandrillDm
         auto_text: auto_text,
         auto_html: auto_html,
         inline_css: inline_css,
+        url_strip_qs: url_strip_qs,
         tags: tags
       }
     end
@@ -87,6 +88,10 @@ module MandrillDm
 
     def track_opens
       nil_true_false?(:track_opens)
+    end
+
+    def url_strip_qs
+      nil_true_false?(:url_strip_qs)
     end
 
     private

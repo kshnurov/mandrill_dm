@@ -371,7 +371,20 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#signing_domain'
+  describe '#signing_domain' do
+    it 'takes a signing_domain' do
+      mail = mail(signing_domain: 'signing_domain.com')
+      message = described_class.new(mail)
+      expect(message.signing_domain).to eq('signing_domain.com')
+    end
+
+    it 'does not take signing_domain value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.signing_domain).to be_nil
+    end
+  end
+
   pending '#return_path_domain'
   pending '#merge'
   pending '#global_merge_vars'

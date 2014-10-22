@@ -46,6 +46,10 @@ module MandrillDm
       nil_true_false?(:preserve_recipients)
     end
 
+    def signing_domain
+      @mail[:signing_domain] ? @mail[:signing_domain].to_s : nil
+    end
+
     def subaccount
       @mail.header["subaccount"].to_s
     end
@@ -85,6 +89,7 @@ module MandrillDm
         preserve_recipients: preserve_recipients,
         view_content_link: view_content_link,
         tracking_domain: tracking_domain,
+        signing_domain: signing_domain,
         tags: tags
       }
     end

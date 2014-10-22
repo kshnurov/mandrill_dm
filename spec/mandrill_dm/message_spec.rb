@@ -309,7 +309,26 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#preserve_recipients'
+  describe '#preserve_recipients' do
+    it 'takes a preserve_recipients with true' do
+      mail = mail(preserve_recipients: true)
+      message = described_class.new(mail)
+      expect(message.preserve_recipients).to be true
+    end
+
+    it 'takes a preserve_recipients with false' do
+      mail = mail(preserve_recipients: false)
+      message = described_class.new(mail)
+      expect(message.preserve_recipients).to be false
+    end
+
+    it 'does not take preserve_recipients value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.preserve_recipients).to be_nil
+    end
+  end
+
   pending '#view_content_link'
 
   describe  '#bcc_address' do

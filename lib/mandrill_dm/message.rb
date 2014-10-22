@@ -42,6 +42,10 @@ module MandrillDm
       nil_true_false?(:inline_css)
     end
 
+    def preserve_recipients
+      nil_true_false?(:preserve_recipients)
+    end
+
     def subaccount
       @mail.header["subaccount"].to_s
     end
@@ -78,6 +82,7 @@ module MandrillDm
         auto_html: auto_html,
         inline_css: inline_css,
         url_strip_qs: url_strip_qs,
+        preserve_recipients: preserve_recipients,
         tags: tags
       }
     end

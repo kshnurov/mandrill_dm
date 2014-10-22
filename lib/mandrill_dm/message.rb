@@ -38,6 +38,10 @@ module MandrillDm
       @mail[:important].to_s == "true" ? true : false
     end
 
+    def inline_css
+      nil_true_false?(:inline_css)
+    end
+
     def subaccount
       @mail.header["subaccount"].to_s
     end
@@ -72,6 +76,7 @@ module MandrillDm
         track_clicks: track_clicks,
         auto_text: auto_text,
         auto_html: auto_html,
+        inline_css: inline_css,
         tags: tags
       }
     end

@@ -269,7 +269,26 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#inline_css'
+  describe '#inline_css' do
+    it 'takes a inline_css with true' do
+      mail = mail(inline_css: true)
+      message = described_class.new(mail)
+      expect(message.inline_css).to be true
+    end
+
+    it 'takes a inline_css with false' do
+      mail = mail(inline_css: false)
+      message = described_class.new(mail)
+      expect(message.inline_css).to be false
+    end
+
+    it 'does not take an inline_css value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.inline_css).to be_nil
+    end
+  end
+
   pending '#url_strip_qs'
   pending '#preserve_recipients'
   pending '#view_content_link'

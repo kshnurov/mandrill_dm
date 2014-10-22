@@ -46,6 +46,10 @@ module MandrillDm
       nil_true_false?(:preserve_recipients)
     end
 
+    def return_path_domain
+      @mail[:return_path_domain] ? @mail[:return_path_domain].to_s : nil
+    end
+
     def signing_domain
       @mail[:signing_domain] ? @mail[:signing_domain].to_s : nil
     end
@@ -90,6 +94,7 @@ module MandrillDm
         view_content_link: view_content_link,
         tracking_domain: tracking_domain,
         signing_domain: signing_domain,
+        return_path_domain: return_path_domain,
         tags: tags
       }
     end

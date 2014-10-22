@@ -385,7 +385,20 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#return_path_domain'
+  describe '#return_path_domain' do
+    it 'takes a return_path_domain' do
+      mail = mail(return_path_domain: 'return_path_domain.com')
+      message = described_class.new(mail)
+      expect(message.return_path_domain).to eq('return_path_domain.com')
+    end
+
+    it 'does not take return_path_domain value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.return_path_domain).to be_nil
+    end
+  end
+
   pending '#merge'
   pending '#global_merge_vars'
   pending '#merge_vars'

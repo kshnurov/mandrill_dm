@@ -329,7 +329,25 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#view_content_link'
+  describe '#view_content_link' do
+    it 'takes a view_content_link with true' do
+      mail = mail(view_content_link: true)
+      message = described_class.new(mail)
+      expect(message.view_content_link).to be true
+    end
+
+    it 'takes a view_content_link with false' do
+      mail = mail(view_content_link: false)
+      message = described_class.new(mail)
+      expect(message.view_content_link).to be false
+    end
+
+    it 'does not take view_content_link value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.view_content_link).to be_nil
+    end
+  end
 
   describe  '#bcc_address' do
     it 'takes a bcc_address' do

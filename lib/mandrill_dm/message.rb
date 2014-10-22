@@ -83,6 +83,7 @@ module MandrillDm
         inline_css: inline_css,
         url_strip_qs: url_strip_qs,
         preserve_recipients: preserve_recipients,
+        view_content_link: view_content_link,
         tags: tags
       }
     end
@@ -97,6 +98,10 @@ module MandrillDm
 
     def url_strip_qs
       nil_true_false?(:url_strip_qs)
+    end
+
+    def view_content_link
+      nil_true_false?(:view_content_link)
     end
 
     private

@@ -92,10 +92,12 @@ module MandrillDm
         url_strip_qs: url_strip_qs,
         preserve_recipients: preserve_recipients,
         view_content_link: view_content_link,
+        bcc_address: bcc_address,
         tracking_domain: tracking_domain,
         signing_domain: signing_domain,
         return_path_domain: return_path_domain,
-        tags: tags
+        tags: tags,
+        subaccount: subaccount
       }
     end
 

@@ -355,6 +355,12 @@ describe MandrillDm::Message do
       message = described_class.new(mail)
       expect(message.bcc_address).to eq('bart@simpsons.com')
     end
+
+    it 'does not take bcc_address value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.bcc_address).to be_nil
+    end
   end
 
   describe '#tracking_domain' do
@@ -422,6 +428,12 @@ describe MandrillDm::Message do
       mail = mail(subaccount: 'abc123')
       message = described_class.new(mail)
       expect(message.subaccount).to eq('abc123')
+    end
+
+    it 'does not take subaccount value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.subaccount).to be_nil
     end
   end
 

@@ -15,7 +15,7 @@ module MandrillDm
     end
 
     def bcc_address
-      @mail.header["bcc_address"].to_s
+      return_string_value(:bcc_address)
     end
 
     def from_email
@@ -47,15 +47,15 @@ module MandrillDm
     end
 
     def return_path_domain
-      @mail[:return_path_domain] ? @mail[:return_path_domain].to_s : nil
+      return_string_value(:return_path_domain)
     end
 
     def signing_domain
-      @mail[:signing_domain] ? @mail[:signing_domain].to_s : nil
+      return_string_value(:signing_domain)
     end
 
     def subaccount
-      @mail.header["subaccount"].to_s
+      return_string_value(:subaccount)
     end
 
     def subject
@@ -110,7 +110,7 @@ module MandrillDm
     end
 
     def tracking_domain
-      @mail[:tracking_domain] ? @mail[:tracking_domain].to_s : nil
+      return_string_value(:tracking_domain)
     end
 
     def url_strip_qs
@@ -176,6 +176,10 @@ module MandrillDm
           type: address_field.name.downcase
         }
       end
+    end
+
+    def return_string_value(field)
+      @mail[field] ? @mail[field].to_s : nil
     end
 
     def nil_true_false?(field)

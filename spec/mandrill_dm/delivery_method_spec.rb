@@ -13,6 +13,7 @@ describe MandrillDm::DeliveryMethod do
   context '#deliver!' do
     let(:mail_message) { instance_double(Mail::Message) }
     let(:api_key)      { '1234567890' }
+    let(:async)        { false }
     let(:dm_message)   { instance_double(MandrillDm::Message) }
     let(:response)     { { 'some_response_key' => 'some response value' } }
     let(:messages)     { instance_double(Mandrill::Messages, send: response) }
@@ -20,9 +21,11 @@ describe MandrillDm::DeliveryMethod do
 
     before(:each) do
       allow(Mandrill::API).to receive(:new).and_return(api)
-      allow(MandrillDm).to(
-        receive_message_chain(:configuration, :api_key).and_return(api_key)
-      )
+      allow(MandrillDm).to receive_message_chain(
+        :configuration,
+        :api_key
+      ).and_return(api_key)
+      allow(MandrillDm).to receive_message_chain(:configuration, :async).and_return(async)
       allow(MandrillDm::Message).to receive(:new).and_return(dm_message)
     end
 
@@ -44,7 +47,7 @@ describe MandrillDm::DeliveryMethod do
 
     it 'sends the JSON version of the Mandrill message via the API' do
       allow(dm_message).to receive(:to_json).and_return('Some message JSON')
-      expect(messages).to receive(:send).with('Some message JSON')
+      expect(messages).to receive(:send).with('Some message JSON', false)
 
       subject
     end

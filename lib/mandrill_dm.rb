@@ -22,10 +22,11 @@ module MandrillDm
 
   # @see MandrillDm.configure
   class Configuration
-    attr_accessor :api_key
+    attr_accessor :api_key, :async
 
     def initialize
       @api_key = ''
+      @async = false
     end
   end
 end

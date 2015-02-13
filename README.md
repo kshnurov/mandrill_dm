@@ -32,6 +32,13 @@ end
 
 NOTE: If you don't already have an environment variable for your Mandrill API key, don't forget to create one.
 
+### Available configuration options
+
+Option     | Default value     | Description
+-----------|-------------------|------------------------------------------------------------
+`api_key`  |                   | Mandrill API key.
+`async`    | `false`           | Enable a background sending mode that is optimized for bulk sending.
+
 ## Development & Feedback
 
 Questions or problems? Please use the issue tracker. If you would like to contribute to this project, fork this repository. Pull requests appreciated.

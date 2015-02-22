@@ -33,7 +33,7 @@ module MandrillDm
     end
 
     def html
-      @mail.html_part ? @mail.html_part.body.decoded : @mail.body.decoded
+      @mail.html_part ? @mail.html_part.body.decoded : nil
     end
 
     def important
@@ -69,7 +69,7 @@ module MandrillDm
     end
 
     def text
-      @mail.multipart? ? (@mail.text_part ? @mail.text_part.body.decoded : nil) : nil
+      @mail.multipart? ? (@mail.text_part ? @mail.text_part.body.decoded : nil) : @mail.body.decoded
     end
 
     def to

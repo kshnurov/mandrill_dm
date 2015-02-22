@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{lib,spec}/**/*", "[A-Z]*"] - ["Gemfile.lock"]
   s.require_path = "lib"
 
-  s.add_dependency 'mandrill-api', '~> 1.0.51'
+  s.add_dependency 'mandrill-api', '~> 1.0.53'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'mail'
 end

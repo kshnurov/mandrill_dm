@@ -143,16 +143,211 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#headers'
-  pending '#important'
-  pending '#track_opens'
-  pending '#track_clicks'
-  pending '#auto_text'
-  pending '#auto_html'
-  pending '#inline_css'
-  pending '#url_strip_qs'
-  pending '#preserve_recipients'
-  pending '#view_content_link'
+  describe '#headers' do
+    it 'takes an extra header' do
+      mail = mail(headers: {'Reply-To' => 'name1@domain.tld'})
+      message = described_class.new(mail)
+      expect(message.headers).to eq({'Reply-To' => 'name1@domain.tld'})
+    end
+
+    it 'takes an extra header with reply_to' do
+      mail = mail(reply_to: 'name1@domain.tld')
+      message = described_class.new(mail)
+      expect(message.headers).to eq({'Reply-To' => 'name1@domain.tld'})
+    end
+
+    it 'takes more extra headers' do
+      mail = mail(headers: {'Reply-To' => 'name1@domain.tld', 'X-MC-Track' => 'opens, clicks_htmlonly', 'X-MC-URLStripQS' => 'true'})
+      message = described_class.new(mail)
+      expect(message.headers).to eq(
+        {
+          'Reply-To' => 'name1@domain.tld',
+          'X-MC-Track' => 'opens, clicks_htmlonly',
+          'X-MC-URLStripQS' => 'true'
+        }
+      )
+    end
+  end
+
+  describe '#important' do
+    it 'takes an important email' do
+      mail = mail(important: true)
+      message = described_class.new(mail)
+      expect(message.important).to be true
+    end
+
+    it 'takes a non important email' do
+      mail = mail(important: false)
+      message = described_class.new(mail)
+      expect(message.important).to be false
+    end
+
+    it 'takes a default important value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.important).to be false
+    end
+  end
+
+  describe '#track_opens' do
+    it 'takes a track_opens with true' do
+      mail = mail(track_opens: true)
+      message = described_class.new(mail)
+      expect(message.track_opens).to be true
+    end
+
+    it 'takes a track_opens with false' do
+      mail = mail(track_opens: false)
+      message = described_class.new(mail)
+      expect(message.track_opens).to be false
+    end
+
+    it 'does not take a track_opens value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.track_opens).to be_nil
+    end
+  end
+
+  describe '#track_clicks' do
+    it 'takes a track_clicks with true' do
+      mail = mail(track_clicks: true)
+      message = described_class.new(mail)
+      expect(message.track_clicks).to be true
+    end
+
+    it 'takes a track_clicks with false' do
+      mail = mail(track_clicks: false)
+      message = described_class.new(mail)
+      expect(message.track_clicks).to be false
+    end
+
+    it 'does not take a track_clicks value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.track_clicks).to be_nil
+    end
+  end
+
+  describe '#auto_text' do
+    it 'takes a auto_text with true' do
+      mail = mail(auto_text: true)
+      message = described_class.new(mail)
+      expect(message.auto_text).to be true
+    end
+
+    it 'takes a auto_text with false' do
+      mail = mail(auto_text: false)
+      message = described_class.new(mail)
+      expect(message.auto_text).to be false
+    end
+
+    it 'does not take an auto_text value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.auto_text).to be_nil
+    end
+  end
+
+  describe '#auto_html' do
+    it 'takes a auto_html with true' do
+      mail = mail(auto_html: true)
+      message = described_class.new(mail)
+      expect(message.auto_html).to be true
+    end
+
+    it 'takes a auto_html with false' do
+      mail = mail(auto_html: false)
+      message = described_class.new(mail)
+      expect(message.auto_html).to be false
+    end
+
+    it 'does not take an auto_html value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.auto_html).to be_nil
+    end
+  end
+
+  describe '#inline_css' do
+    it 'takes a inline_css with true' do
+      mail = mail(inline_css: true)
+      message = described_class.new(mail)
+      expect(message.inline_css).to be true
+    end
+
+    it 'takes a inline_css with false' do
+      mail = mail(inline_css: false)
+      message = described_class.new(mail)
+      expect(message.inline_css).to be false
+    end
+
+    it 'does not take an inline_css value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.inline_css).to be_nil
+    end
+  end
+
+  describe '#url_strip_qs'do
+    it 'takes a url_strip_qs with true' do
+      mail = mail(url_strip_qs: true)
+      message = described_class.new(mail)
+      expect(message.url_strip_qs).to be true
+    end
+
+    it 'takes a url_strip_qs with false' do
+      mail = mail(url_strip_qs: false)
+      message = described_class.new(mail)
+      expect(message.url_strip_qs).to be false
+    end
+
+    it 'does not take an url_strip_qs value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.url_strip_qs).to be_nil
+    end
+  end
+
+  describe '#preserve_recipients' do
+    it 'takes a preserve_recipients with true' do
+      mail = mail(preserve_recipients: true)
+      message = described_class.new(mail)
+      expect(message.preserve_recipients).to be true
+    end
+
+    it 'takes a preserve_recipients with false' do
+      mail = mail(preserve_recipients: false)
+      message = described_class.new(mail)
+      expect(message.preserve_recipients).to be false
+    end
+
+    it 'does not take preserve_recipients value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.preserve_recipients).to be_nil
+    end
+  end
+
+  describe '#view_content_link' do
+    it 'takes a view_content_link with true' do
+      mail = mail(view_content_link: true)
+      message = described_class.new(mail)
+      expect(message.view_content_link).to be true
+    end
+
+    it 'takes a view_content_link with false' do
+      mail = mail(view_content_link: false)
+      message = described_class.new(mail)
+      expect(message.view_content_link).to be false
+    end
+
+    it 'does not take view_content_link value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.view_content_link).to be_nil
+    end
+  end
 
   describe  '#bcc_address' do
     it 'takes a bcc_address' do
@@ -160,21 +355,85 @@ describe MandrillDm::Message do
       message = described_class.new(mail)
       expect(message.bcc_address).to eq('bart@simpsons.com')
     end
+
+    it 'does not take bcc_address value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.bcc_address).to be_nil
+    end
   end
 
-  pending '#tracking_domain'
-  pending '#signing_domain'
-  pending '#return_path_domain'
+  describe '#tracking_domain' do
+    it 'takes a tracking_domain' do
+      mail = mail(tracking_domain: 'tracking_domain.com')
+      message = described_class.new(mail)
+      expect(message.tracking_domain).to eq('tracking_domain.com')
+    end
+
+    it 'does not take tracking_domain value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.tracking_domain).to be_nil
+    end
+  end
+
+  describe '#signing_domain' do
+    it 'takes a signing_domain' do
+      mail = mail(signing_domain: 'signing_domain.com')
+      message = described_class.new(mail)
+      expect(message.signing_domain).to eq('signing_domain.com')
+    end
+
+    it 'does not take signing_domain value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.signing_domain).to be_nil
+    end
+  end
+
+  describe '#return_path_domain' do
+    it 'takes a return_path_domain' do
+      mail = mail(return_path_domain: 'return_path_domain.com')
+      message = described_class.new(mail)
+      expect(message.return_path_domain).to eq('return_path_domain.com')
+    end
+
+    it 'does not take return_path_domain value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.return_path_domain).to be_nil
+    end
+  end
+
   pending '#merge'
   pending '#global_merge_vars'
   pending '#merge_vars'
-  pending '#tags'
+
+  describe '#tags' do
+    it 'takes a tag' do
+      mail = mail(tags: 'test_tag')
+      message = described_class.new(mail)
+      expect(message.tags).to eq(['test_tag'])
+    end
+
+    it 'takes an array of tags' do
+      mail = mail(tags: ['test_tag1', 'test_tag2'])
+      message = described_class.new(mail)
+      expect(message.tags).to eq(['test_tag1', 'test_tag2'])
+    end
+  end
 
   describe '#subaccount' do
     it 'takes a subaccount' do
       mail = mail(subaccount: 'abc123')
       message = described_class.new(mail)
       expect(message.subaccount).to eq('abc123')
+    end
+
+    it 'does not take subaccount value' do
+      mail = mail()
+      message = described_class.new(mail)
+      expect(message.subaccount).to be_nil
     end
   end
 
@@ -196,9 +455,9 @@ describe MandrillDm::Message do
 
   describe "#to_json" do
     it "returns a proper JSON response for the Mandrill API" do
-      mail = mail(body: 'test', from: 'name@domain.tld')
+      mail = mail(body: 'test', from: 'name@domain.tld', headers: {'Reply-To' => 'name1@domain.tld'}, tags: 'test_tag')
       message = described_class.new(mail)
-      expect(message.to_json).to include(:from_email, :from_name, :html, :subject, :to)
+      expect(message.to_json).to include(:from_email, :from_name, :html, :subject, :to, :headers, :tags)
     end
 
     it "returns a proper JSON response for the Mandrill API with attachments" do

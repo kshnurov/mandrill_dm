@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'mandrill_dm'
-  s.version = '1.1.1'
-  s.date = '2014-10-24'
+  s.version = '1.2'
+  s.date = '2015-02-22'
   s.summary = "A basic Mandrill delivery method for Rails."
   s.description = "An easy way to transition from the SMTP delivery method in Rails to Mandrill's API, while still using ActionMailer."
   s.authors = "Jonathan Berglund"

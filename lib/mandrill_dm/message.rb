@@ -1,3 +1,5 @@
+require 'base64'
+
 module MandrillDm
   class Message
     attr_reader :mail
@@ -38,8 +40,25 @@ module MandrillDm
       combine_address_fields.reject{|h| h.nil?}.flatten
     end
 
+    def has_attachment?
+      @mail.attachments.any?
+    end
+
+    # Returns a Mandrill API compatible attachment hash
+    def attachments
+      return nil unless @mail.attachments.any?
+
+      @mail.attachments.collect do |attachment|
+        { 
+          name: attachment.filename,
+          type: attachment.mime_type,
+          content: Base64.encode64(attachment.body.decoded)
+        }
+      end
+    end
+
     def to_json
-      {
+      json_hash = {
         html: html,
         text: text,
         subject: subject,
@@ -47,6 +66,7 @@ module MandrillDm
         from_name: from_name,
         to: to
       }
+      has_attachment? ? json_hash.merge(attachments: attachments) : json_hash
     end
 
     private

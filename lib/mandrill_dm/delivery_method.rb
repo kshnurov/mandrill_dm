@@ -1,15 +1,15 @@
 module MandrillDm
   class DeliveryMethod
-    attr_accessor :settings
+    attr_accessor :settings, :response
 
     def initialize(options = {})
-      self.settings = options
+      @settings = options
     end
 
     def deliver!(mail)
-      mandrill = Mandrill::API.new(MandrillDm.configuration.api_key)
-      message = Message.new(mail).to_json
-      result = mandrill.messages.send(message)
+      mandrill_api = Mandrill::API.new(MandrillDm.configuration.api_key)
+      message = Message.new(mail)
+      @response = mandrill_api.messages.send(message.to_json)
     end
   end
 end

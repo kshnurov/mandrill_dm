@@ -33,7 +33,7 @@ module MandrillDm
     end
 
     def html
-      @mail.html_part ? @mail.html_part.body.decoded : nil
+      @mail.html_part ? @mail.html_part.body.decoded : @mail.body.decoded
     end
 
     def important
@@ -69,7 +69,7 @@ module MandrillDm
     end
 
     def text
-      @mail.multipart? ? (@mail.text_part ? @mail.text_part.body.decoded : nil) : @mail.body.decoded
+      @mail.multipart? ? (@mail.text_part ? @mail.text_part.body.decoded : nil) : nil
     end
 
     def to
@@ -85,7 +85,7 @@ module MandrillDm
       return nil unless @mail.attachments.any?
 
       @mail.attachments.collect do |attachment|
-        { 
+        {
           name: attachment.filename,
           type: attachment.mime_type,
           content: Base64.encode64(attachment.body.decoded)

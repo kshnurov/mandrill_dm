@@ -3,6 +3,7 @@
 
 [![Build Status](https://travis-ci.org/jlberglund/mandrill_dm.svg?branch=master)](https://travis-ci.org/jlberglund/mandrill_dm)
 [![Gem Version](https://badge.fury.io/rb/mandrill_dm.svg)](http://badge.fury.io/rb/mandrill_dm)
+[![security](https://hakiri.io/github/jlberglund/mandrill_dm/master.svg)](https://hakiri.io/github/jlberglund/mandrill_dm/master)
 
 Use Mandrill DM to use ActionMailer with the Mandrill API. Perfect for transitioning from Mandrill's SMTP service to their API.
 
@@ -28,7 +29,7 @@ MandrillDm.configure do |config|
 end
 ```
 
-NOTE: If you don't already have an environment varaiable for your Mandrill API key, don't forget to create one.
+NOTE: If you don't already have an environment variable for your Mandrill API key, don't forget to create one.
 
 ## Development & Feedback
 

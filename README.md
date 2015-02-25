@@ -1,8 +1,12 @@
-#Mandrill DM
+
+# Mandrill DM
+
+[![Build Status](https://travis-ci.org/jlberglund/mandrill_dm.svg?branch=master)](https://travis-ci.org/jlberglund/mandrill_dm)
+[![Gem Version](https://badge.fury.io/rb/mandrill_dm.svg)](http://badge.fury.io/rb/mandrill_dm)
 
 Use Mandrill DM to use ActionMailer with the Mandrill API. Perfect for transitioning from Mandrill's SMTP service to their API.
 
-##  Rails Setup
+## Rails Setup
 
 First, add the gem to your Gemfile and run the `bundle` command to install it.
 

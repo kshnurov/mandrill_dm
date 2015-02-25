@@ -15,4 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'mandrill-api', '~> 1.0.53'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'mail'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'travis-lint'
 end

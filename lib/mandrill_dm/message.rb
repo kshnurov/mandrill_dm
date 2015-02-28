@@ -8,6 +8,19 @@ module MandrillDm
       @mail = mail
     end
 
+    # Returns a Mandrill API compatible attachment hash
+    def attachments
+      return nil unless mail.attachments.any?
+
+      mail.attachments.collect do |attachment|
+        {
+          name: attachment.filename,
+          type: attachment.mime_type,
+          content: Base64.encode64(attachment.body.decoded)
+        }
+      end
+    end
+
     def auto_text
       nil_true_false?(:auto_text)
     end
@@ -33,15 +46,23 @@ module MandrillDm
     end
 
     def html
-      @mail.html_part ? @mail.html_part.body.decoded : @mail.body.decoded
+      mail.html_part ? mail.html_part.body.decoded : mail.body.decoded
     end
 
     def important
-      @mail[:important].to_s == "true" ? true : false
+      mail[:important].to_s == 'true' ? true : false
     end
 
     def inline_css
       nil_true_false?(:inline_css)
+    end
+
+    def merge
+      nil_true_false?(:merge)
+    end
+
+    def merge_language
+      return_string_value(:merge_language)
     end
 
     def preserve_recipients
@@ -61,7 +82,7 @@ module MandrillDm
     end
 
     def subject
-      @mail.subject
+      mail.subject
     end
 
     def tags
@@ -69,56 +90,11 @@ module MandrillDm
     end
 
     def text
-      @mail.multipart? ? (@mail.text_part ? @mail.text_part.body.decoded : nil) : nil
+      mail.multipart? ? (mail.text_part ? mail.text_part.body.decoded : nil) : nil
     end
 
     def to
       combine_address_fields.reject{|h| h.nil?}.flatten
-    end
-
-    def has_attachment?
-      @mail.attachments.any?
-    end
-
-    # Returns a Mandrill API compatible attachment hash
-    def attachments
-      return nil unless @mail.attachments.any?
-
-      @mail.attachments.collect do |attachment|
-        {
-          name: attachment.filename,
-          type: attachment.mime_type,
-          content: Base64.encode64(attachment.body.decoded)
-        }
-      end
-    end
-
-    def to_json
-      json_hash = {
-        html: html,
-        text: text,
-        subject: subject,
-        from_email: from_email,
-        from_name: from_name,
-        to: to,
-        headers: headers,
-        important: important,
-        track_opens: track_opens,
-        track_clicks: track_clicks,
-        auto_text: auto_text,
-        auto_html: auto_html,
-        inline_css: inline_css,
-        url_strip_qs: url_strip_qs,
-        preserve_recipients: preserve_recipients,
-        view_content_link: view_content_link,
-        bcc_address: bcc_address,
-        tracking_domain: tracking_domain,
-        signing_domain: signing_domain,
-        return_path_domain: return_path_domain,
-        tags: tags,
-        subaccount: subaccount
-      }
-      has_attachment? ? json_hash.merge(attachments: attachments) : json_hash
     end
 
     def track_clicks
@@ -141,46 +117,77 @@ module MandrillDm
       nil_true_false?(:view_content_link)
     end
 
-    private
+    def to_json
+      json_hash = {
+        auto_html: auto_html,
+        auto_text: auto_text,
+        bcc_address: bcc_address,
+        from_email: from_email,
+        from_name: from_name,
+        headers: headers,
+        html: html,
+        important: important,
+        inline_css: inline_css,
+        merge: merge,
+        merge_language: merge_language,
+        preserve_recipients: preserve_recipients,
+        return_path_domain: return_path_domain,
+        signing_domain: signing_domain,
+        subaccount: subaccount,
+        subject: subject,
+        tags: tags,
+        text: text,
+        to: to,
+        track_clicks: track_clicks,
+        track_opens: track_opens,
+        tracking_domain: tracking_domain,
+        url_strip_qs: url_strip_qs,
+        view_content_link: view_content_link
+      }
+
+      attachment? ? json_hash.merge(attachments: attachments) : json_hash
+    end
+
+  private
 
     # Returns an array of tags
     def collect_tags
-      @mail[:tags].to_s.split(', ').map { |tag| tag }
+      mail[:tags].to_s.split(', ').map { |tag| tag }
     end
 
     # Returns a single, flattened hash with all to, cc, and bcc addresses
     def combine_address_fields
-      %w[to cc bcc].map do |field|
-        hash_addresses(@mail[field])
+      %w(to cc bcc).map do |field|
+        hash_addresses(mail[field])
       end
     end
 
     # Returns a hash of extra headers (not complete)
     def combine_extra_header_fields
-      headers = {}
-      %w[Reply-To
-         X-MC-Track
-         X-MC-GoogleAnalytics
-         X-MC-GoogleAnalyticsCampaign
-         X-MC-URLStripQS
-         X-MC-PreserveRecipients
-         X-MC-InlineCSS
-         X-MC-TrackingDomain
-         X-MC-SigningDomain
-         X-MC-Subaccount
-         X-MC-ViewContentLink
-         X-MC-BccAddress
-         X-MC-Important
-         X-MC-IpPool
-         X-MC-ReturnPathDomain].each do |field|
-        headers[field] = @mail[field].to_s if @mail[field]
+      %w(
+        Reply-To
+        X-MC-BccAddress
+        X-MC-GoogleAnalytics
+        X-MC-GoogleAnalyticsCampaign
+        X-MC-Important
+        X-MC-InlineCSS
+        X-MC-IpPool
+        X-MC-PreserveRecipients
+        X-MC-ReturnPathDomain
+        X-MC-SigningDomain
+        X-MC-Subaccount
+        X-MC-Track
+        X-MC-TrackingDomain
+        X-MC-URLStripQS
+        X-MC-ViewContentLink
+      ).each_with_object({}) do |field, headers|
+        headers[field] = mail[field].to_s if mail[field]
       end
-      headers
     end
 
     # Returns a Mail::Address object using the from field
     def from
-      address = @mail[:from].formatted
+      address = mail[:from].formatted
       Mail::Address.new(address.first)
     end
 
@@ -198,12 +205,16 @@ module MandrillDm
       end
     end
 
+    def attachment?
+      mail.attachments.any?
+    end
+
     def return_string_value(field)
-      @mail[field] ? @mail[field].to_s : nil
+      mail[field] ? mail[field].to_s : nil
     end
 
     def nil_true_false?(field)
-      @mail[field].nil? ? nil : (@mail[field].to_s == "true" ? true : false)
+      mail[field].nil? ? nil : (mail[field].to_s == 'true' ? true : false)
     end
   end
 end

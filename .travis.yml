@@ -8,3 +8,6 @@ notifications:
   email:
     on_success: change
     on_failure: always
+script:
+- bundle exec rubocop
+- bundle exec rake spec

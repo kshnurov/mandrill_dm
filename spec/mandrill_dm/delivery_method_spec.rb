@@ -20,7 +20,9 @@ describe MandrillDm::DeliveryMethod do
 
     before(:each) do
       allow(Mandrill::API).to receive(:new).and_return(api)
-      allow(MandrillDm).to receive_message_chain(:configuration, :api_key).and_return(api_key)
+      allow(MandrillDm).to(
+        receive_message_chain(:configuration, :api_key).and_return(api_key)
+      )
       allow(MandrillDm::Message).to receive(:new).and_return(dm_message)
     end
 
@@ -33,7 +35,9 @@ describe MandrillDm::DeliveryMethod do
     end
 
     it 'creates a Mandrill message from the Mail message' do
-      expect(MandrillDm::Message).to receive(:new).with(mail_message).and_return(dm_message)
+      expect(MandrillDm::Message).to(
+        receive(:new).with(mail_message).and_return(dm_message)
+      )
 
       subject
     end

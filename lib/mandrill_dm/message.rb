@@ -1,7 +1,7 @@
 require 'base64'
 
 module MandrillDm
-  class Message
+  class Message # rubocop:disable ClassLength
     attr_reader :mail
 
     def initialize(mail)
@@ -90,11 +90,12 @@ module MandrillDm
     end
 
     def text
-      mail.multipart? ? (mail.text_part ? mail.text_part.body.decoded : nil) : nil
+      return mail.text_part.body.decoded if mail.multipart? && mail.text_part
+      nil
     end
 
     def to
-      combine_address_fields.reject{|h| h.nil?}.flatten
+      combine_address_fields.reject(&:nil?).flatten
     end
 
     def track_clicks
@@ -117,7 +118,7 @@ module MandrillDm
       nil_true_false?(:view_content_link)
     end
 
-    def to_json
+    def to_json # rubocop:disable MethodLength, AbcSize
       json_hash = {
         auto_html: auto_html,
         auto_text: auto_text,
@@ -163,7 +164,7 @@ module MandrillDm
     end
 
     # Returns a hash of extra headers (not complete)
-    def combine_extra_header_fields
+    def combine_extra_header_fields # rubocop:disable MethodLength
       %w(
         Reply-To
         X-MC-BccAddress
@@ -214,7 +215,8 @@ module MandrillDm
     end
 
     def nil_true_false?(field)
-      mail[field].nil? ? nil : (mail[field].to_s == 'true' ? true : false)
+      return nil if mail[field].nil?
+      mail[field].to_s == 'true' ? true : false
     end
   end
 end

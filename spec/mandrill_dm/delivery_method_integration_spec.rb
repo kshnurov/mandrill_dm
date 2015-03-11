@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integration: true do
-
   before(:each) do
     Mail.defaults { delivery_method MandrillDm::DeliveryMethod }
   end
@@ -27,17 +26,19 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
     subject do
       example = self
       Mail.deliver do
-        from      example.from
-        to        example.to
-        cc        example.cc
-        bcc       example.bcc
-        subject   example.message_subject
-        body      example.body
+        from example.from
+        to example.to
+        cc example.cc
+        bcc example.bcc
+        subject example.message_subject
+        body example.body
       end
     end
 
     it 'instantiates the Mandrill API with the configured API key' do
-      expect(Mandrill::API).to receive(:new).with(MandrillDm.configuration.api_key).and_return(api)
+      expect(Mandrill::API).to(
+        receive(:new).with(MandrillDm.configuration.api_key).and_return(api)
+      )
 
       subject
     end
@@ -50,12 +51,16 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
 
     context 'the sent message' do
       it 'contains the provided from address' do
-        expect(messages).to receive(:send).with(hash_including(from_name: from_name, from_email: from_email))
+        expect(messages).to(
+          receive(:send).with(
+            hash_including(from_name: from_name, from_email: from_email)
+          )
+        )
 
         subject
       end
 
-      %w{ to cc bcc }.each do |recipient_type|
+      %w(to cc bcc).each do |recipient_type|
         it 'contains the provided #{recipient_type} addresses' do
           expect(messages).to receive(:send) do |message_hash|
             (1..3).each do |i|

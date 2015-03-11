@@ -1,0 +1,11 @@
+Style/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Metrics/LineLength:
+  Max: 90
+
+Style/Documentation:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19

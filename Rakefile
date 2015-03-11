@@ -22,6 +22,5 @@ task :validate do
   result = `travis-lint #{File.expand_path('../.travis.yml', __FILE__)}`
   puts result.empty? ? 'OK' : result
   print '*' * 80 + "\n"
-  raise 'Travis CI validation failed' unless result.empty?
+  fail 'Travis CI validation failed' unless result.empty?
 end
-

@@ -220,11 +220,11 @@ module MandrillDm
     end
 
     def attachments?
-      mail.attachments.any? {|a| !a.inline? }
+      mail.attachments.any? { |a| !a.inline? }
     end
 
     def inline_attachments?
-      mail.attachments.any? {|a| a.inline? }
+      mail.attachments.any?(&:inline?)
     end
 
     def return_string_value(field)

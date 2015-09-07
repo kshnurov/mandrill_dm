@@ -144,7 +144,7 @@ module MandrillDm
         tracking_domain: tracking_domain,
         url_strip_qs: url_strip_qs,
         view_content_link: view_content_link
-      }
+      }.reject { |key, value| value.nil? }
 
       attachment? ? json_hash.merge(attachments: attachments) : json_hash
     end
@@ -153,7 +153,9 @@ module MandrillDm
 
     # Returns an array of tags
     def collect_tags
-      mail[:tags].to_s.split(', ').map { |tag| tag }
+      if mail[:tags]
+        mail[:tags].to_s.split(', ').map { |tag| tag }
+      end
     end
 
     # Returns a single, flattened hash with all to, cc, and bcc addresses
@@ -178,6 +180,7 @@ module MandrillDm
         X-MC-SigningDomain
         X-MC-Subaccount
         X-MC-Track
+        X-MC-Tags
         X-MC-TrackingDomain
         X-MC-URLStripQS
         X-MC-ViewContentLink

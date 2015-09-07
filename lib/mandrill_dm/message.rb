@@ -180,6 +180,7 @@ module MandrillDm
         X-MC-SigningDomain
         X-MC-Subaccount
         X-MC-Track
+        X-MC-Tags
         X-MC-TrackingDomain
         X-MC-URLStripQS
         X-MC-ViewContentLink

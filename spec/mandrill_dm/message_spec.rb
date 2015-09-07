@@ -521,7 +521,7 @@ describe MandrillDm::Message do
                       tags: 'test_tag')
       message = described_class.new(mail)
       expect(message.to_json).to(
-        include(:from_email, :from_name, :html, :subject, :to, :headers, :tags)
+        include(:from_email, :html, :to, :headers, :tags)
       )
     end
 
@@ -534,8 +534,22 @@ describe MandrillDm::Message do
 
       message = described_class.new(mail)
       expect(message.to_json).to(
-        include(:from_email, :from_name, :html, :subject, :to, :attachments)
+        include(:from_email, :html, :to, :attachments)
       )
+    end
+
+    context 'to prevent overriding header options X-Tags etc' do
+      let(:headers) {
+        { 'X-MC-ViewContentLink' => 'false', 'X-MC-Tags' => 'test,tag', 'X-MC-Track' => 'opens' }
+      }
+      let(:mail) { new_mail(body: 'test',
+                            from: 'name@domain.tld',
+                            headers: headers) }
+      subject(:message_json) { described_class.new(mail).to_json }
+
+      it { should_not have_key(:tags) }
+      it { should_not have_key(:view_content_link) }
+      it { should_not have_key(:track) }
     end
   end
 end

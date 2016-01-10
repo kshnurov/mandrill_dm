@@ -52,6 +52,10 @@ module MandrillDm
       from.display_name
     end
 
+    def global_merge_vars
+      collect_merge_vars(:global_merge_vars)
+    end
+
     def headers
       combine_extra_header_fields
     end
@@ -142,6 +146,7 @@ module MandrillDm
         bcc_address: bcc_address,
         from_email: from_email,
         from_name: from_name,
+        global_merge_vars: global_merge_vars,
         headers: headers,
         html: html,
         important: important,
@@ -170,6 +175,12 @@ module MandrillDm
     end
 
   private
+
+    # Returns an array of merge_vars or gobal_merge_vars
+    def collect_merge_vars(field)
+      return nil unless mail[field]
+      JSON.parse("[#{return_string_value(field).gsub('=>', ':')}]")
+    end
 
     # Returns an array of tags
     def collect_tags

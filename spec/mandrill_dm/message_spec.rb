@@ -141,7 +141,42 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#global_merge_vars'
+  describe '#global_merge_vars' do
+    it 'takes an array of global_merge_vars' do
+      global_merge_vars = [
+        {
+          'name' => 'TESTVAR',
+          'content' => 'testcontent'
+        }
+      ]
+      mail = new_mail(global_merge_vars: global_merge_vars)
+      message = described_class.new(mail)
+      expect(message.global_merge_vars).to eq(global_merge_vars)
+    end
+
+    it 'takes an array of multiple global_merge_vars' do
+      global_merge_vars = [
+        {
+          'name' => 'TESTVAR',
+          'content' => 'testcontent'
+        },
+        {
+          'name' => 'TESTVAR2',
+          'content' => 'testcontent2'
+        }
+      ]
+      mail = new_mail(global_merge_vars: global_merge_vars)
+      message = described_class.new(mail)
+      expect(message.global_merge_vars).to eq(global_merge_vars)
+    end
+
+    it 'does not take global_merge_vars value' do
+      mail = new_mail
+      message = described_class.new(mail)
+      expect(message.global_merge_vars).to be_nil
+    end
+  end
+
   pending '#google_analytics_domains'
   pending '#google_analytics_campaign'
 

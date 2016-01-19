@@ -65,8 +65,10 @@ module MandrillDm
       return_string_value(:merge_language)
     end
 
+    # `mail[:merge_vars].value` returns the variables pre-processed,
+    # `instance_variable_get('@value')` returns them exactly as they were passed in
     def merge_vars
-      mail[:merge_vars] ? mail[:merge_vars].instance_variable_get("@value") : nil
+      mail[:merge_vars] ? mail[:merge_vars].instance_variable_get('@value') : nil
     end
 
     def preserve_recipients

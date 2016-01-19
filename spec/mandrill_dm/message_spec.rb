@@ -247,7 +247,11 @@ describe MandrillDm::Message do
 
   describe '#merge_vars' do
     it 'takes an array od merge_vars definitions' do
-      merge_vars = [ { 'rcpt' => 'a@a.de', 'vars' => [ { 'name' => 'MY_VAR', 'content' => 'foo' } ] } ]
+      vars = [
+        { 'name' => 'MY_VAR_1', 'content' => 'foo' },
+        { 'name' => 'MY_VAR_2', 'content' => 'bar' }
+      ]
+      merge_vars = [{ 'rcpt' => 'a@a.de', 'vars' => vars }]
       mail = new_mail(merge_vars: merge_vars)
       message = described_class.new(mail)
       expect(message.merge_vars).to eq(merge_vars)

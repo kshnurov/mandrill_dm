@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe MandrillDm::Message do
-  def new_mail(options = {}, &blk)
-    Mail.new(options, &blk)
-  end
-
   describe '#attachments' do
     it 'takes an attachment' do
       mail = new_mail(to: 'name@domain.tld', content_type: 'multipart/alternative')

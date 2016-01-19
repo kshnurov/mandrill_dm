@@ -1,6 +1,7 @@
 require 'mandrill'
 
 require 'mandrill_dm/message'
+require 'mandrill_dm/template'
 require 'mandrill_dm/delivery_method'
 require 'mandrill_dm/railtie' if defined? Rails
 

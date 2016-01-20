@@ -49,6 +49,14 @@ module MandrillDm
       mail.html_part ? mail.html_part.body.decoded : mail.body.decoded
     end
 
+    def template
+      return_string_value(:template)
+    end
+
+    def template_content
+      return_string_value(:template_content)
+    end
+
     def important
       mail[:important].to_s == 'true' ? true : false
     end

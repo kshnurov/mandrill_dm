@@ -23,15 +23,15 @@ module MandrillDm
       end
 
       def template_content
-        template_content = []
-        template_content_hash = eval(@message.template_content)
-        template_content_hash.each do |name, content|
-          template_content.push({
+        template_cnt = []
+        template_cnt_hash = eval(@message.template_content)
+        template_cnt_hash.each do |name, content|
+          template_cnt.push({
             name: name,
             content: content.is_a?(Symbol) ? message_json[content] : content
           })
         end
-        template_content
+        template_cnt
       end
   end
 end

@@ -181,6 +181,9 @@ module MandrillDm
         X-MC-TrackingDomain
         X-MC-URLStripQS
         X-MC-ViewContentLink
+        X-MC-Template
+        X-MC-AutoText
+        X-MC-MergeVars
       ).each_with_object({}) do |field, headers|
         headers[field] = mail[field].to_s if mail[field]
       end

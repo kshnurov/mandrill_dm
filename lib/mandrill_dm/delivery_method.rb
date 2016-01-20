@@ -8,8 +8,30 @@ module MandrillDm
 
     def deliver!(mail)
       mandrill_api = Mandrill::API.new(MandrillDm.configuration.api_key)
-      message = Message.new(mail)
-      @response = mandrill_api.messages.send(message.to_json)
+      @message = Message.new(mail)
+      if @message.template
+        @response = mandrill_api.messages.send_template(@message.template, template_content, message_json)
+      else
+        @response = mandrill_api.messages.send(message_json)
+      end
     end
+
+    private
+
+      def message_json
+        @message_json ||= @message.to_json
+      end
+
+      def template_content
+        template_content = []
+        template_content_hash = eval(@message.template_content)
+        template_content_hash.each do |name, content|
+          template_content.push({
+            name: name,
+            content: content.is_a?(Symbol) ? message_json[content] : content
+          })
+        end
+        template_content
+      end
   end
 end

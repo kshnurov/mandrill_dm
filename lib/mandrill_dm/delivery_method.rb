@@ -27,7 +27,7 @@ module MandrillDm
         template_cnt_hash = eval(@message.template_content)
         template_cnt_hash.each do |name, content|
           template_cnt.push({
-            name: name,
+            name: name.to_s,
             content: content.is_a?(Symbol) ? message_json[content] : content
           })
         end

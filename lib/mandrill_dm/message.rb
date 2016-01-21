@@ -49,6 +49,14 @@ module MandrillDm
       mail.html_part ? mail.html_part.body.decoded : mail.body.decoded
     end
 
+    def template
+      return_string_value(:template)
+    end
+
+    def template_content
+      return_string_value(:template_content)
+    end
+
     def important
       mail[:important].to_s == 'true' ? true : false
     end
@@ -181,6 +189,9 @@ module MandrillDm
         X-MC-TrackingDomain
         X-MC-URLStripQS
         X-MC-ViewContentLink
+        X-MC-Template
+        X-MC-AutoText
+        X-MC-MergeVars
       ).each_with_object({}) do |field, headers|
         headers[field] = mail[field].to_s if mail[field]
       end

@@ -6,7 +6,7 @@ require 'mandrill_dm/version'
 Gem::Specification.new do |s|
   s.name = 'mandrill_dm'
   s.version = MandrillDm::VERSION
-  s.date = '2015-03-31'
+  s.date = '2016-01-20'
   s.summary = 'A basic Mandrill delivery method for Rails.'
   s.description = 'An easy way to transition from the SMTP delivery method ' \
                   "in Rails to Mandrill's API, while still using ActionMailer."

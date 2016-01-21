@@ -31,6 +31,27 @@ end
 
 NOTE: If you don't already have an environment variable for your Mandrill API key, don't forget to create one.
 
+### Mandrill Templates
+
+If you want to use this gem with mandrill templates you just have to add the `template` param to the `mail` function.
+
+```ruby
+class MyMailer < ActionMailer::Base
+  def notify_user(email)
+    mail(
+      to: email,
+      from: 'your@email.com',
+      template: 'your-mandrill-template-slug',
+      template_content: { # optional
+        header: 'string to replace a *|header|* in your template', 
+        content: 'string to replace a *|content|* in your template' 
+      }
+    )
+  end
+end
+```
+
+
 ## Development & Feedback
 
 Questions or problems? Please use the issue tracker. If you would like to contribute to this project, fork this repository. Pull requests appreciated.

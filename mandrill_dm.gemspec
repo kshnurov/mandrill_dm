@@ -1,7 +1,12 @@
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'mandrill_dm/version'
+
 Gem::Specification.new do |s|
   s.name = 'mandrill_dm'
-  s.version = '1.2.0'
-  s.date = '2015-03-31'
+  s.version = MandrillDm::VERSION
+  s.date = '2016-01-20'
   s.summary = 'A basic Mandrill delivery method for Rails.'
   s.description = 'An easy way to transition from the SMTP delivery method ' \
                   "in Rails to Mandrill's API, while still using ActionMailer."

@@ -23,6 +23,7 @@ module MandrillDm
       end
 
       def template_content
+        return [{name: 'blank', content: ''}] unless @message.template_content
         template_cnt = []
         template_cnt_hash = eval(@message.template_content)
         template_cnt_hash.each do |name, content|

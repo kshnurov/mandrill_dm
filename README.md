@@ -1,11 +1,12 @@
 
 # Mandrill DM
 
-[![Build Status](https://travis-ci.org/jlberglund/mandrill_dm.svg?branch=master)](https://travis-ci.org/jlberglund/mandrill_dm)
+[![Build Status](https://travis-ci.org/spovich/mandrill_dm.svg?branch=master)](https://travis-ci.org/spovich/mandrill_dm)
 [![Gem Version](https://badge.fury.io/rb/mandrill_dm.svg)](http://badge.fury.io/rb/mandrill_dm)
-[![security](https://hakiri.io/github/jlberglund/mandrill_dm/master.svg)](https://hakiri.io/github/jlberglund/mandrill_dm/master)
+[![security](https://hakiri.io/github/spovich/mandrill_dm/master.svg)](https://hakiri.io/github/spovich/mandrill_dm/master)
 
-Use Mandrill DM to use ActionMailer with the Mandrill API. Perfect for transitioning from Mandrill's SMTP service to their API.
+Mandrill DM allows you to use ActionMailer with the Mandrill API. Created by [Jonathan Berglund](https://github.com/jlberglund)
+and maintained by [John Dell](https://github.com/spovich), and [Kirill Shnurov](https://github.com/kshnurov) and a various [contributors](https://github.com/spovich/mandrill_dm/graphs/contributors).
 
 ## Rails Setup
 

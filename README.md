@@ -6,7 +6,7 @@
 [![security](https://hakiri.io/github/spovich/mandrill_dm/master.svg)](https://hakiri.io/github/spovich/mandrill_dm/master)
 
 Mandrill DM allows you to use ActionMailer with the Mandrill API. Created by [Jonathan Berglund](https://github.com/jlberglund)
-and maintained by [John Dell](https://github.com/spovich), and [Kirill Shnurov](https://github.com/kshnurov) and a various [contributors](https://github.com/spovich/mandrill_dm/graphs/contributors).
+and maintained by [John Dell](https://github.com/spovich), and [Kirill Shnurov](https://github.com/kshnurov) and various [contributors](https://github.com/spovich/mandrill_dm/graphs/contributors).
 
 ## Rails Setup
 

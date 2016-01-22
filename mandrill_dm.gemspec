@@ -3,11 +3,10 @@ Gem::Specification.new do |s|
   s.version = '1.2.0'
   s.date = '2015-03-31'
   s.summary = 'A basic Mandrill delivery method for Rails.'
-  s.description = 'An easy way to transition from the SMTP delivery method ' \
-                  "in Rails to Mandrill's API, while still using ActionMailer."
-  s.authors = 'Jonathan Berglund'
-  s.email = 'jonathan.berglund@gmail.com'
-  s.homepage = 'http://github.com/jlberglund/mandrill_dm'
+  s.description = 'A basic Mandrill delivery method for Rails.'
+  s.authors = ['Jonathan Berglund', 'John Dell', 'Kirill Shnurov']
+  s.email = ['jonathan.berglund@gmail.com', 'spovich@gmail.com']
+  s.homepage = 'http://github.com/spovich/mandrill_dm'
   s.license = 'MIT'
 
   s.files = Dir['{lib,spec}/**/*', '[A-Z]*'] - ['Gemfile.lock']

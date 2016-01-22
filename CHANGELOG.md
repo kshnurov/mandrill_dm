@@ -1,3 +1,7 @@
+### Unreleased
+
+- [#20](https://github.com/spovich/mandrill_dm/pull/20) Inline image attachments
+
 ### 1.2.0 (2015-03-31)
 
  - [#2](https://github.com/spovich/mandrill_dm/pull/2) Attachment support

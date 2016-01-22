@@ -10,11 +10,22 @@ module MandrillDm
 
     # Returns a Mandrill API compatible attachment hash
     def attachments
-      return nil unless mail.attachments.any?
-
-      mail.attachments.collect do |attachment|
+      regular_attachments = mail.attachments.reject(&:inline?)
+      regular_attachments.collect do |attachment|
         {
           name: attachment.filename,
+          type: attachment.mime_type,
+          content: Base64.encode64(attachment.body.decoded)
+        }
+      end
+    end
+
+    # Mandrill uses a different hash for inlined image attachments
+    def images
+      inline_attachments = mail.attachments.select(&:inline?)
+      inline_attachments.collect do |attachment|
+        {
+          name: attachment.cid,
           type: attachment.mime_type,
           content: Base64.encode64(attachment.body.decoded)
         }
@@ -146,7 +157,9 @@ module MandrillDm
         view_content_link: view_content_link
       }
 
-      attachment? ? json_hash.merge(attachments: attachments) : json_hash
+      json_hash[:attachments] = attachments if attachments?
+      json_hash[:images] = images if inline_attachments?
+      json_hash
     end
 
   private
@@ -206,8 +219,12 @@ module MandrillDm
       end
     end
 
-    def attachment?
-      mail.attachments.any?
+    def attachments?
+      mail.attachments.any? { |a| !a.inline? }
+    end
+
+    def inline_attachments?
+      mail.attachments.any?(&:inline?)
     end
 
     def return_string_value(field)

@@ -1,6 +1,8 @@
 ### Unreleased
 
-- [#20](https://github.com/spovich/mandrill_dm/pull/20) Inline image attachments
+- [#7](https://github.com/spovich/mandrill_dm/pull/7) asynchronous message support, thanks @beorc
+- [#22](https://github.com/spovich/mandrill_dm/pull/22) merge_vars support, thanks @tomasc
+- [#20](https://github.com/spovich/mandrill_dm/pull/20) Inline image attachments support, thanks @ropiku
 
 ### 1.2.0 (2015-03-31)
 

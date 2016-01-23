@@ -284,7 +284,19 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#merge_vars'
+  describe '#merge_vars' do
+    it 'takes an array od merge_vars definitions' do
+      vars = [
+        { 'name' => 'MY_VAR_1', 'content' => 'foo' },
+        { 'name' => 'MY_VAR_2', 'content' => 'bar' }
+      ]
+      merge_vars = [ { 'rcpt' => 'a@a.de', 'vars' => vars } ]
+      mail = new_mail(merge_vars: merge_vars)
+      message = described_class.new(mail)
+      expect(message.merge_vars).to eq(merge_vars)
+    end
+  end
+
   pending '#metadata'
 
   describe '#preserve_recipients' do

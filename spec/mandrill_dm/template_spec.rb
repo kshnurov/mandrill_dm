@@ -17,12 +17,7 @@ describe MandrillDm::Template do
 
   describe '#content' do
     it 'takes an array of template_content' do
-      template_content = [
-        {
-          'name' => 'test name',
-          'content' => 'test content'
-        }
-      ]
+      template_content = [{ 'name' => 'test name', 'content' => 'test content' }]
       mail = new_mail(template_content: template_content)
       template = described_class.new(mail)
       expect(template.content).to eq(template_content)

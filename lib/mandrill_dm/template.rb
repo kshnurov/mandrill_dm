@@ -12,7 +12,7 @@ module MandrillDm
 
     def content
       return [] unless mail[:template_content]
-      JSON.parse("[#{mail[:template_content].to_s.gsub('=>', ':')}]")
+      mail[:template_content].instance_variable_get('@value')
     end
   end
 end

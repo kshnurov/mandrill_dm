@@ -27,6 +27,7 @@ Third, create an initializer such as `config/initializers/mandrill.rb` and paste
 ```ruby
 MandrillDm.configure do |config|
   config.api_key = ENV['MANDRILL_APIKEY']
+  # config.async = false
 end
 ```
 

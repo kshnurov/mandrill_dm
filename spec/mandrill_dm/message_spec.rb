@@ -31,34 +31,6 @@ describe MandrillDm::Message do
     end
   end
 
-  describe '#images' do
-    it 'takes an inline attachment' do
-      mail = new_mail(to: 'name@domain.tld', content_type: 'multipart/alternative')
-      mail.attachments.inline['text.jpg'] = {
-        mime_type: 'image/jpg',
-        content: 'This is a test'
-      }
-
-      message = described_class.new(mail)
-      expect(message.images).to eq(
-        [{ name: mail.attachments[0].cid,
-           type: 'image/jpg',
-           content: "VGhpcyBpcyBhIHRlc3Q=\n" }]
-      )
-    end
-
-    it 'ignores normal attachments' do
-      mail = new_mail(to: 'name@domain.tld', content_type: 'multipart/alternative')
-      mail.attachments['text.txt'] = {
-        mime_type: 'text/plain',
-        content: 'This is a test'
-      }
-
-      message = described_class.new(mail)
-      expect(message.images).to eq([])
-    end
-  end
-
   describe '#auto_html' do
     it 'takes a auto_html with true' do
       mail = new_mail(auto_html: true)
@@ -232,7 +204,33 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#images'
+  describe '#images' do
+    it 'takes an inline attachment' do
+      mail = new_mail(to: 'name@domain.tld', content_type: 'multipart/alternative')
+      mail.attachments.inline['text.jpg'] = {
+        mime_type: 'image/jpg',
+        content: 'This is a test'
+      }
+
+      message = described_class.new(mail)
+      expect(message.images).to eq(
+        [{ name: mail.attachments[0].cid,
+           type: 'image/jpg',
+           content: "VGhpcyBpcyBhIHRlc3Q=\n" }]
+      )
+    end
+
+    it 'ignores normal attachments' do
+      mail = new_mail(to: 'name@domain.tld', content_type: 'multipart/alternative')
+      mail.attachments['text.txt'] = {
+        mime_type: 'text/plain',
+        content: 'This is a test'
+      }
+
+      message = described_class.new(mail)
+      expect(message.images).to eq([])
+    end
+  end
 
   describe '#important' do
     it 'takes an important email' do

@@ -52,6 +52,10 @@ module MandrillDm
       from.display_name
     end
 
+    def global_merge_vars
+      get_value(:global_merge_vars)
+    end
+
     def headers
       combine_extra_header_fields
     end
@@ -76,10 +80,8 @@ module MandrillDm
       return_string_value(:merge_language)
     end
 
-    # `mail[:merge_vars].value` returns the variables pre-processed,
-    # `instance_variable_get('@value')` returns them exactly as they were passed in
     def merge_vars
-      mail[:merge_vars] ? mail[:merge_vars].instance_variable_get('@value') : nil
+      get_value(:merge_vars)
     end
 
     def preserve_recipients
@@ -142,6 +144,7 @@ module MandrillDm
         bcc_address: bcc_address,
         from_email: from_email,
         from_name: from_name,
+        global_merge_vars: global_merge_vars,
         headers: headers,
         html: html,
         important: important,
@@ -210,6 +213,13 @@ module MandrillDm
     def from
       address = mail[:from].formatted
       Mail::Address.new(address.first)
+    end
+
+    # Returns an array of values e.g. merge_vars or gobal_merge_vars
+    # `mail[:merge_vars].value` returns the variables pre-processed,
+    # `instance_variable_get('@value')` returns them exactly as they were passed in
+    def get_value(field)
+      mail[field] ? mail[field].instance_variable_get('@value') : nil
     end
 
     # Returns a Mandrill API compatible email address hash

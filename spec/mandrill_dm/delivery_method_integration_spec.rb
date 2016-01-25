@@ -14,7 +14,7 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
     let(:bcc)              { (1..3).map { |i| "Bcc #{i} <bcc_#{i}@domain.tld>" } }
     let(:message_subject)  { 'Some Message Subject' }
     let(:body)             { 'Some Message Body' }
-    let(:template_name)    { 'Test Template' }
+    let(:template)         { 'Test Template' }
     let(:template_content) { [{ 'name' => 'Some Name', 'content' => 'Some Content' }] }
 
     let(:api)      { instance_double(Mandrill::API) }
@@ -101,7 +101,7 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
       subject do
         example = self
         new_mail(
-          template_name: example.template_name,
+          template: example.template,
           template_content: example.template_content,
           from: example.from,
           to: example.to,
@@ -125,7 +125,7 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
 
       it 'contains the provided data' do
         expect(messages).to receive(:send_template).with(
-          template_name,
+          template,
           template_content,
           hash_including(subject: message_subject,
                          from_name: from_name,

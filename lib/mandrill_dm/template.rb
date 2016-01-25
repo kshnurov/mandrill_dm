@@ -6,8 +6,9 @@ module MandrillDm
       @mail = mail
     end
 
+    # ActionMailer is using the 'template_name', so we can't use it.
     def name
-      mail[:template_name] ? mail[:template_name].to_s : nil
+      mail[:template] ? mail[:template].to_s : nil
     end
 
     def content

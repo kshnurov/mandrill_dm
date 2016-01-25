@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe MandrillDm::Template do
   describe '#name' do
-    it 'takes a template_name with true' do
-      mail = new_mail(template_name: 'test template name')
+    it 'takes a template with true' do
+      mail = new_mail(template: 'test template name')
       template = described_class.new(mail)
       expect(template.name).to eq('test template name')
     end
 
-    it 'does not take an template_name value' do
+    it 'does not take an template value' do
       mail = new_mail
       template = described_class.new(mail)
       expect(template.name).to be_nil

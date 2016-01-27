@@ -216,10 +216,10 @@ module MandrillDm
     end
 
     # Returns an array of values e.g. merge_vars or gobal_merge_vars
-    # `mail[:merge_vars].value` returns the variables pre-processed,
-    # `instance_variable_get('@value')` returns them exactly as they were passed in
     def get_value(field)
-      mail[field] ? mail[field].instance_variable_get('@value') : nil
+      return nil unless mail[field]
+      value = mail[field].to_s.gsub(/:(\w+)/, '"\\1"').gsub('=>', ':')
+      JSON.parse("[#{value}]")
     end
 
     # Returns a Mandrill API compatible email address hash

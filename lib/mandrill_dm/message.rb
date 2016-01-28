@@ -218,7 +218,7 @@ module MandrillDm
     # Returns an array of values e.g. merge_vars or gobal_merge_vars
     def get_value(field)
       return nil unless mail[field]
-      value = mail[field].to_s.gsub(/:(\w+)/, '"\\1"').gsub('=>', ':')
+      value = mail[field].to_s.gsub(/:([a-z_]+)/, '"\\1"').gsub('=>', ':')
       JSON.parse("[#{value}]")
     end
 

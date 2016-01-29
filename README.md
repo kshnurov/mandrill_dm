@@ -40,6 +40,32 @@ Option     | Default value     | Description
 `api_key`  |                   | Mandrill API key.
 `async`    | `false`           | Enable a background sending mode that is optimized for bulk sending.
 
+### Mandrill Templates
+
+If you want to use this gem with mandrill templates you just have to add the `template` param to the `mail` function.
+
+```ruby
+class MyMailer < ActionMailer::Base
+  def notify_user(email)
+    mail(
+      to: email,
+      from: 'your@email.com',
+      template: 'your-mandrill-template-slug',
+      template_content: [ # optional
+        {
+          name: 'header',
+          content: 'string to replace a *|header|* in your template', 
+        },
+        {
+          name: 'content',
+          content: 'string to replace a *|content|* in your template'
+        }
+      ]
+    )
+  end
+end
+```
+
 ## Development & Feedback
 
 Questions or problems? Please use the issue tracker. If you would like to contribute to this project, fork this repository. Pull requests appreciated.

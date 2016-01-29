@@ -64,6 +64,17 @@ module MandrillDm
       mail.html_part ? mail.html_part.body.decoded : mail.body.decoded
     end
 
+    def template
+      return_string_value(:template)
+    end
+
+    # `mail[:template_content].value` returns the variables pre-processed,
+    # `instance_variable_get('@value')` returns them exactly as they were passed in
+    def template_content
+      return unless mail[:template_content]
+      mail[:template_content].instance_variable_get('@value')
+    end
+
     def important
       mail[:important].to_s == 'true' ? true : false
     end
@@ -190,16 +201,19 @@ module MandrillDm
     def combine_extra_header_fields # rubocop:disable MethodLength
       %w(
         Reply-To
+        X-MC-AutoText
         X-MC-BccAddress
         X-MC-GoogleAnalytics
         X-MC-GoogleAnalyticsCampaign
         X-MC-Important
         X-MC-InlineCSS
         X-MC-IpPool
+        X-MC-MergeVars
         X-MC-PreserveRecipients
         X-MC-ReturnPathDomain
         X-MC-SigningDomain
         X-MC-Subaccount
+        X-MC-Template
         X-MC-Track
         X-MC-TrackingDomain
         X-MC-URLStripQS

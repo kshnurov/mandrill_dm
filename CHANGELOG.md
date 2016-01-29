@@ -1,5 +1,6 @@
 ### Unreleased
 
+- [#32](https://github.com/spovich/mandrill_dm/pull/32) fix compatibility with `mail` gem >= 2.5.x (rails 3.2+), thanks @sysqa
 - [#23](https://github.com/spovich/mandrill_dm/pull/23) global_merge_vars support, thanks @sysqa
 - [#7](https://github.com/spovich/mandrill_dm/pull/7) asynchronous message support, thanks @beorc
 - [#22](https://github.com/spovich/mandrill_dm/pull/22) merge_vars support, thanks @tomasc

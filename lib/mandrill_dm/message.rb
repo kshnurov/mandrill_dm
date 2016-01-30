@@ -216,10 +216,18 @@ module MandrillDm
     end
 
     # Returns an array of values e.g. merge_vars or gobal_merge_vars
-    # `mail[:merge_vars].value` returns the variables pre-processed,
-    # `instance_variable_get('@value')` returns them exactly as they were passed in
+    #
+    # `instance_variable_get('@value')` returns them exactly as passed in
+    # but this is only available in mail gem >= 2.6
+    #
+    # So for apps using an older mail version (rails 3.2 uses mail 2.5), we
+    # manually convert the value back to (hopefully) the original value.
     def get_value(field)
-      mail[field] ? mail[field].instance_variable_get('@value') : nil
+      return nil unless mail[field]
+      return mail[field].instance_variable_get('@value') if mail_2_6_or_later?
+
+      value = mail[field].to_s.gsub(/:([a-z_]+)/, '"\\1"').gsub('=>', ':')
+      JSON.parse("[#{value}]")
     end
 
     # Returns a Mandrill API compatible email address hash
@@ -234,6 +242,10 @@ module MandrillDm
           type: address_field.name.downcase
         }
       end
+    end
+
+    def mail_2_6_or_later?
+      Gem::Version.new(Mail::VERSION.version) >= Gem::Version.new('2.6.0')
     end
 
     def attachments?

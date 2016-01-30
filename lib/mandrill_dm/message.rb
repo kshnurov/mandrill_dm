@@ -224,7 +224,7 @@ module MandrillDm
     # manually convert the value back to (hopefully) the original value.
     def get_value(field)
       return nil unless mail[field]
-      return mail[field].instance_variable_get('@value') if mail_2_6_or_later?
+      return mail[field].instance_variable_get(:@value) if mail_2_6_or_later?
 
       value = mail[field].to_s.gsub(/:([a-z_]+)/, '"\\1"').gsub('=>', ':')
       JSON.parse("[#{value}]")

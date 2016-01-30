@@ -1,15 +1,22 @@
-language: ruby
 sudo: false
+language: ruby
+
 rvm:
-- 1.9.3
-- 2.0
-- 2.1
-- 2.2
-- 2.3.0
+  - 1.9.3
+  - 2.0
+  - 2.1
+  - 2.2
+  - 2.3.0
+
+gemfile:
+  - gemfiles/mail25.gemfile
+  - gemfiles/mail26.gemfile
+
 notifications:
   email:
     on_success: change
     on_failure: always
+
 script:
-- bundle exec rubocop
-- bundle exec rake spec
+  - bundle exec rubocop
+  - bundle exec rake spec

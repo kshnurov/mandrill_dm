@@ -131,6 +131,16 @@ describe MandrillDm::Message do
       expect(message.global_merge_vars).to eq(global_merge_vars)
     end
 
+    it 'does not use gsub to convert string into JSON' do
+      global_merge_vars = [
+        { 'name' => 'TESTVAR', 'content' => 'do you know how :async works?' },
+        { 'name' => 'TESTVAR2', 'content' => 'more than 10 recipients => always "true"!' }
+      ]
+      mail = new_mail(global_merge_vars: global_merge_vars)
+      message = described_class.new(mail)
+      expect(message.global_merge_vars).to eq(global_merge_vars)
+    end
+
     it 'does not take global_merge_vars value' do
       mail = new_mail
       message = described_class.new(mail)
@@ -307,7 +317,7 @@ describe MandrillDm::Message do
   end
 
   describe '#merge_vars' do
-    it 'takes an array od merge_vars definitions' do
+    it 'takes an array of merge_vars definitions' do
       vars = [
         { 'name' => 'MY_VAR_1', 'content' => 'foo' },
         { 'name' => 'MY_VAR_2', 'content' => 'bar' }
@@ -327,6 +337,17 @@ describe MandrillDm::Message do
         { 'rcpt' => 'name1@domain.tld', 'vars' => vars },
         { 'rcpt' => 'name2@domain.tld', 'vars' => vars }
       ]
+      mail = new_mail(merge_vars: merge_vars)
+      message = described_class.new(mail)
+      expect(message.merge_vars).to eq(merge_vars)
+    end
+
+    it 'does not use gsub to convert string into JSON' do
+      vars = [
+        { 'name' => 'MY_VAR_1', 'content' => 'do you know how :async works?' },
+        { 'name' => 'MY_VAR_2', 'content' => 'more than 10 recipients => always true!' }
+      ]
+      merge_vars = [{ 'rcpt' => 'a@a.de', 'vars' => vars }]
       mail = new_mail(merge_vars: merge_vars)
       message = described_class.new(mail)
       expect(message.merge_vars).to eq(merge_vars)

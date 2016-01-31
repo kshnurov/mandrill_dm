@@ -40,6 +40,18 @@ Option     | Default value     | Description
 `api_key`  |                   | Mandrill API key.
 `async`    | `false`           | Enable a background sending mode that is optimized for bulk sending.
 
+## Testing
+
+This gem uses the ruby appraisal gem to allow testing against different versions
+of dependent gems.
+
+To run tests in all environments:
+* `rake appraisal`
+
+Or to run tests for a single environment:
+* `appraisal mail25 rake spec`
+* `appraisal mail26 rake spec`
+
 ## Development & Feedback
 
 Questions or problems? Please use the issue tracker. If you would like to contribute to this project, fork this repository. Pull requests appreciated.

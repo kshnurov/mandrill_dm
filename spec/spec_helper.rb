@@ -28,3 +28,7 @@ RSpec.configure do |config|
     Excon.stub({}, body: '{}', status: 200)
   end
 end
+
+def new_mail(options = {}, &blk)
+  Mail.new(options, &blk)
+end

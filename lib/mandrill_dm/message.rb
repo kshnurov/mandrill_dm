@@ -68,11 +68,8 @@ module MandrillDm
       return_string_value(:template)
     end
 
-    # `mail[:template_content].value` returns the variables pre-processed,
-    # `instance_variable_get('@value')` returns them exactly as they were passed in
     def template_content
-      return [{ name: 'blank', content: '' }] unless mail[:template_content]
-      mail[:template_content].instance_variable_get('@value')
+      get_value(:template_content)
     end
 
     def important

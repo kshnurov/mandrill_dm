@@ -7,34 +7,21 @@ module MandrillDm
     end
 
     def deliver!(mail)
-      @message = Message.new(mail)
-      @response = if @message.template
-                    send_template
+      mandrill_api = Mandrill::API.new(MandrillDm.configuration.api_key)
+      message = Message.new(mail)
+      @response = if message.template
+                    mandrill_api.messages.send_template(
+                      message.template,
+                      message.template_content,
+                      message.to_json,
+                      MandrillDm.configuration.async
+                    )
                   else
-                    send_message
-                  end
-    end
-
-  private
-
-    def send_template
-      mandrill_api.messages.send_template(
-        @message.template,
-        @message.template_content,
-        @message.to_json,
-        MandrillDm.configuration.async
-      )
-    end
-
-    def send_message
-      mandrill_api.messages.send(
-        @message.to_json,
-        MandrillDm.configuration.async
-      )
-    end
-
-    def mandrill_api
-      @mandrill_api ||= Mandrill::API.new(MandrillDm.configuration.api_key)
+                    mandrill_api.messages.send(
+                      message.to_json,
+                      MandrillDm.configuration.async
+                    )
+      end
     end
   end
 end

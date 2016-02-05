@@ -61,5 +61,10 @@ describe MandrillDm::DeliveryMethod do
 
       expect(delivery_method.response).to eql(response)
     end
+
+    it 'adds sent email to MandrillDm::DeliveryMethod.deliveries' do
+      expect { subject }.to change { MandrillDm::DeliveryMethod.deliveries.size }.by(1)
+      expect(MandrillDm::DeliveryMethod.deliveries.last).to be(mail_message)
+    end
   end
 end

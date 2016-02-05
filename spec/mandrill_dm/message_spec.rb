@@ -587,7 +587,7 @@ describe MandrillDm::Message do
     end
   end
 
-  describe '#url_strip_qs'do
+  describe '#url_strip_qs' do
     it 'takes a url_strip_qs with true' do
       mail = new_mail(url_strip_qs: true)
       message = described_class.new(mail)

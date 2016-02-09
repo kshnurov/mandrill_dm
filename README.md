@@ -44,6 +44,8 @@ Option     | Default value     | Description
 
 If you want to use this gem with mandrill templates you just have to add the `template` param to the `mail` function.
 
+> We use `template` instead of `template_name` as described in mandrill documentation since `template_name` it's used by [ActionMailer](http://api.rubyonrails.org/classes/ActionMailer/Base.html).
+
 ```ruby
 class MyMailer < ActionMailer::Base
   def notify_user(email)

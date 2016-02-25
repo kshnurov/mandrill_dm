@@ -33,6 +33,8 @@ end
 
 NOTE: If you don't already have an environment variable for your Mandrill API key, don't forget to create one.
 
+**Rails 3**: see [Rails 3 (Mail 2.5) support](https://github.com/spovich/mandrill_dm/wiki/Rails-3-(Mail-2.5)-support)
+
 ### Available configuration options
 
 Option     | Default value     | Description

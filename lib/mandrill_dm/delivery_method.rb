@@ -11,7 +11,9 @@ module MandrillDm
       message = Message.new(mail)
       @response = mandrill_api.messages.send(
         message.to_json,
-        MandrillDm.configuration.async
+        MandrillDm.configuration.async,
+        "Main Pool",
+        message.send_at
       )
     end
   end

@@ -1,4 +1,5 @@
 require 'base64'
+require 'time'
 
 module MandrillDm
   class Message # rubocop:disable ClassLength
@@ -84,12 +85,20 @@ module MandrillDm
       get_value(:merge_vars)
     end
 
+    def metadata
+      get_value(:metadata)
+    end
+
     def preserve_recipients
       nil_true_false?(:preserve_recipients)
     end
 
     def return_path_domain
       return_string_value(:return_path_domain)
+    end
+
+    def send_at
+      return_time_parsed_string_value(:send_at)
     end
 
     def signing_domain
@@ -152,6 +161,7 @@ module MandrillDm
         merge: merge,
         merge_language: merge_language,
         merge_vars: merge_vars,
+        metadata: metadata,
         preserve_recipients: preserve_recipients,
         return_path_domain: return_path_domain,
         signing_domain: signing_domain,
@@ -246,6 +256,10 @@ module MandrillDm
 
     def return_string_value(field)
       mail[field] ? mail[field].to_s : nil
+    end
+
+    def return_time_parsed_string_value(field)
+      mail[field] ? Time.parse(mail[field].value).utc.strftime("%Y-%m-%d %H:%M:%S") : nil
     end
 
     def nil_true_false?(field)

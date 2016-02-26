@@ -30,7 +30,6 @@ describe MandrillDm::DeliveryMethod do
       allow(MandrillDm).to receive_message_chain(:configuration, :async).and_return(async)
       allow(MandrillDm::Message).to receive(:new).and_return(dm_message)
       allow(dm_message).to receive(:send_at).and_return(nil)
-
     end
 
     subject { delivery_method.deliver!(mail_message) }
@@ -51,7 +50,7 @@ describe MandrillDm::DeliveryMethod do
 
     it 'sends the JSON version of the Mandrill message via the API' do
       allow(dm_message).to receive(:to_json).and_return('Some message JSON')
-      expect(messages).to receive(:send).with('Some message JSON', false, "Main Pool", nil)
+      expect(messages).to receive(:send).with('Some message JSON', false, nil, nil)
 
       subject
     end
@@ -66,12 +65,10 @@ describe MandrillDm::DeliveryMethod do
       expect(delivery_method.response).to eql(response)
     end
 
-    context 'with a send_at time' do
+    describe 'with a send_at time' do
       before(:each) do
         allow(dm_message).to receive(:send_at).and_return("2016-08-08 18:36:25")
       end
-
-      subject { delivery_method.deliver!(mail_message) }
 
       it 'instantiates the Mandrill API with the configured API key' do
         expect(Mandrill::API).to receive(:new).with(api_key).and_return(api)
@@ -89,7 +86,8 @@ describe MandrillDm::DeliveryMethod do
 
       it 'sends the JSON version of the Mandrill message via the API' do
         allow(dm_message).to receive(:to_json).and_return('Some message JSON')
-        expect(messages).to receive(:send).with('Some message JSON', false, "Main Pool", "2016-08-08 18:36:25")
+        expect(messages).to receive(:send).with('Some message JSON', false, nil, "2016-08-08 18:36:25")
+        subject
       end
     end
 

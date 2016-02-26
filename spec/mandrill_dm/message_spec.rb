@@ -413,14 +413,28 @@ describe MandrillDm::Message do
   end
 
   describe '#send_at' do
-    it 'takes a send_at DateTime and converts to format expected by Mandrill' do
+    it 'takes a send_at Time object and converts to format expected by Mandrill' do
       # from API docs: this message should be sent as a UTC timestamp in YYYY-MM-DD HH:MM:SS format
       mail = new_mail(send_at: Time.new(2016,8,8, 13, 36, 25, "-05:00"))
       message = described_class.new(mail)
       expect(message.send_at).to eq("2016-08-08 18:36:25")
     end
 
-    it 'does not take signing_domain value' do
+    it 'takes a send_at Date object and converts to format expected by Mandrill' do
+      # from API docs: this message should be sent as a UTC timestamp in YYYY-MM-DD HH:MM:SS format
+      mail = new_mail(send_at: Date.new(2016,8,8))
+      message = described_class.new(mail)
+      expect(message.send_at).to eq("2016-08-08 04:00:00")
+    end
+
+    it 'takes a send_at DateTime object and converts to format expected by Mandrill' do
+      # from API docs: this message should be sent as a UTC timestamp in YYYY-MM-DD HH:MM:SS format
+      mail = new_mail(send_at: DateTime.new(2016,8,8))
+      message = described_class.new(mail)
+      expect(message.send_at).to eq("2016-08-08 00:00:00")
+    end
+
+    it 'does not take send_at value' do
       mail = new_mail
       message = described_class.new(mail)
       expect(message.send_at).to be_nil

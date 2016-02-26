@@ -33,12 +33,42 @@ end
 
 NOTE: If you don't already have an environment variable for your Mandrill API key, don't forget to create one.
 
+**Rails 3**: see [Rails 3 (Mail 2.5) support](https://github.com/spovich/mandrill_dm/wiki/Rails-3-(Mail-2.5)-support)
+
 ### Available configuration options
 
 Option     | Default value     | Description
 -----------|-------------------|------------------------------------------------------------
 `api_key`  |                   | Mandrill API key.
 `async`    | `false`           | Enable a background sending mode that is optimized for bulk sending.
+
+### Mandrill Templates
+
+If you want to use this gem with mandrill templates you just have to add the `template` param to the `mail` function.
+
+> We use `template` instead of `template_name` as described in mandrill documentation since `template_name` it's used by [ActionMailer](http://api.rubyonrails.org/classes/ActionMailer/Base.html).
+
+```ruby
+class MyMailer < ActionMailer::Base
+  def notify_user(email)
+    mail(
+      to: email,
+      from: 'your@email.com',
+      template: 'your-mandrill-template-slug',
+      template_content: [ # optional
+        {
+          name: 'header',
+          content: 'string to replace a *|header|* in your template', 
+        },
+        {
+          name: 'content',
+          content: 'string to replace a *|content|* in your template'
+        }
+      ]
+    )
+  end
+end
+```
 
 ## Development & Feedback
 

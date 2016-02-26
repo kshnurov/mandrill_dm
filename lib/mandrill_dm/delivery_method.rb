@@ -6,15 +6,27 @@ module MandrillDm
       @settings = options
     end
 
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def deliver!(mail)
       mandrill_api = Mandrill::API.new(MandrillDm.configuration.api_key)
       message = Message.new(mail)
-      @response = mandrill_api.messages.send(
-        message.to_json,
-        MandrillDm.configuration.async,
-        "Main Pool",
-        message.send_at
-      )
+    
+      if message.template
+        @response = mandrill_api.messages.send_template(
+          message.template,
+          message.template_content,
+          message.to_json,
+          MandrillDm.configuration.async
+        )
+      else
+        @response = mandrill_api.messages.send(
+          message.to_json,
+          MandrillDm.configuration.async,
+          "Main Pool",
+          message.send_at
+        )
+      end
     end
   end
 end

@@ -11,7 +11,8 @@ describe MandrillDm::DeliveryMethod do
   end
 
   context '#deliver!' do
-    let(:mail_message) { instance_double(Mail::Message) }
+    let(:msg_methods)  { {'date=' => nil, 'date' => nil} }
+    let(:mail_message) { instance_double(Mail::Message, msg_methods) }
     let(:api_key)      { '1234567890' }
     let(:async)        { false }
     let(:dm_message)   { instance_double(MandrillDm::Message) }
@@ -70,6 +71,8 @@ describe MandrillDm::DeliveryMethod do
         allow(dm_message).to receive(:send_at).and_return("2016-08-08 18:36:25")
       end
 
+      subject { delivery_method.deliver!(mail_message) }
+
       it 'instantiates the Mandrill API with the configured API key' do
         expect(Mandrill::API).to receive(:new).with(api_key).and_return(api)
 
@@ -89,6 +92,8 @@ describe MandrillDm::DeliveryMethod do
         expect(messages).to receive(:send).with('Some message JSON', false, nil, "2016-08-08 18:36:25")
         subject
       end
+
+
     end
 
 
@@ -119,7 +124,9 @@ describe MandrillDm::DeliveryMethod do
             template_slug,
             template_content,
             message_json,
-            async
+            async,
+            nil,
+            nil
           )
         )
 

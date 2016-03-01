@@ -1,5 +1,4 @@
 require 'base64'
-require 'time'
 
 module MandrillDm
   class Message # rubocop:disable ClassLength
@@ -106,7 +105,7 @@ module MandrillDm
     end
 
     def send_at
-      return_time_parsed_string_value(:send_at)
+      return_time_as_formatted_string(get_value(:send_at))
     end
 
     def signing_domain
@@ -269,9 +268,14 @@ module MandrillDm
       mail[field] ? mail[field].to_s : nil
     end
 
-    def return_time_parsed_string_value(field)
-      mail[field] ? Time.parse(mail[field].value).utc.strftime("%Y-%m-%d %H:%M:%S") : nil
+    def return_time_as_formatted_string(obj)
+      date_or_time?(obj) ? obj.to_time.utc.strftime("%Y-%m-%d %H:%M:%S") : obj
     end
+
+    def date_or_time?(obj)
+      obj.kind_of?(Date) || obj.kind_of?(Time)
+    end
+
 
     def nil_true_false?(field)
       return nil if mail[field].nil?

@@ -269,13 +269,14 @@ module MandrillDm
     end
 
     def return_time_as_formatted_string(obj)
-      date_or_time?(obj) ? obj.to_time.utc.strftime("%Y-%m-%d %H:%M:%S") : obj
+      if obj.kind_of?(Date)
+        return Time.new(obj.year, obj.month, obj.day, 0, 0, 0, "+00:00").strftime("%Y-%m-%d %H:%M:%S")
+      elsif obj.kind_of?(Time)
+        return obj.utc.strftime("%Y-%m-%d %H:%M:%S")
+      else
+        return obj
+      end
     end
-
-    def date_or_time?(obj)
-      obj.kind_of?(Date) || obj.kind_of?(Time)
-    end
-
 
     def nil_true_false?(field)
       return nil if mail[field].nil?

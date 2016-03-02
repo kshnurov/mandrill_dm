@@ -423,7 +423,7 @@ describe MandrillDm::Message do
     it 'takes a send_at Date object and converts to format expected by Mandrill' do
       mail = new_mail(send_at: Date.new(2016,8,8))
       message = described_class.new(mail)
-      expect(message.send_at).to eq("2016-08-08 04:00:00")
+      expect(message.send_at).to eq("2016-08-08 00:00:00")
     end
 
     it 'takes a send_at DateTime object and converts to format expected by Mandrill' do

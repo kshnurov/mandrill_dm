@@ -12,7 +12,6 @@ module MandrillDm
       mandrill_api = Mandrill::API.new(MandrillDm.configuration.api_key)
       message = Message.new(mail)
 
-
       if message.template
         @response = mandrill_api.messages.send_template(
           message.template,

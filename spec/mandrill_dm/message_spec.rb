@@ -363,9 +363,9 @@ describe MandrillDm::Message do
 
   describe '#metadata' do
     it 'takes a metadata with a hash' do
-      mail = new_mail(metadata: {:mail_internal_id => 'nice-uuid-field'})
+      mail = new_mail(metadata: { mail_internal_id: 'nice-uuid-field' })
       message = described_class.new(mail)
-      expect(message.metadata).to eq({"mail_internal_id" => 'nice-uuid-field'})
+      expect(message.metadata).to eq('mail_internal_id' => 'nice-uuid-field')
     end
 
     it 'does not take metadata value' do
@@ -415,19 +415,19 @@ describe MandrillDm::Message do
   describe '#send_at' do
     # from API docs: this message should be sent as a UTC timestamp in YYYY-MM-DD HH:MM:SS format
     it 'takes a send_at Time object and converts to format expected by Mandrill' do
-      mail = new_mail(send_at: Time.new(2016,8,8, 13, 36, 25, "-05:00"))
+      mail = new_mail(send_at: Time.new(2016, 8, 8, 13, 36, 25, "-05:00"))
       message = described_class.new(mail)
       expect(message.send_at).to eq("2016-08-08 18:36:25")
     end
 
     it 'takes a send_at Date object and converts to format expected by Mandrill' do
-      mail = new_mail(send_at: Date.new(2016,8,8))
+      mail = new_mail(send_at: Date.new(2016, 8, 8))
       message = described_class.new(mail)
       expect(message.send_at).to eq("2016-08-08 00:00:00")
     end
 
     it 'takes a send_at DateTime object and converts to format expected by Mandrill' do
-      mail = new_mail(send_at: DateTime.new(2016,8,8))
+      mail = new_mail(send_at: DateTime.new(2016, 8, 8))
       message = described_class.new(mail)
       expect(message.send_at).to eq("2016-08-08 00:00:00")
     end
@@ -701,7 +701,7 @@ describe MandrillDm::Message do
     end
 
     it 'returns a proper JSON response for the Mandrill API with metadata' do
-      mail = new_mail(body: 'test', from: 'name@domain.tld', metadata: {foo: "bar"})
+      mail = new_mail(body: 'test', from: 'name@domain.tld', metadata: { foo: 'bar' })
 
       message = described_class.new(mail)
       expect(message.to_json).to(

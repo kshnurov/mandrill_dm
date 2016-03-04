@@ -51,7 +51,12 @@ describe MandrillDm::DeliveryMethod do
 
     it 'sends the JSON version of the Mandrill message via the API' do
       allow(dm_message).to receive(:to_json).and_return('Some message JSON')
-      expect(messages).to receive(:send).with('Some message JSON', false, nil, nil)
+      expect(messages).to receive(:send).with(
+        'Some message JSON',
+        false,
+        nil,
+        nil
+      )
 
       subject
     end
@@ -68,7 +73,7 @@ describe MandrillDm::DeliveryMethod do
 
     describe 'with a send_at time' do
       before(:each) do
-        allow(dm_message).to receive(:send_at).and_return("2016-08-08 18:36:25")
+        allow(dm_message).to receive(:send_at).and_return('2016-08-08 18:36:25')
       end
 
       subject { delivery_method.deliver!(mail_message) }
@@ -89,13 +94,15 @@ describe MandrillDm::DeliveryMethod do
 
       it 'sends the JSON version of the Mandrill message via the API' do
         allow(dm_message).to receive(:to_json).and_return('Some message JSON')
-        expect(messages).to receive(:send).with('Some message JSON', false, nil, "2016-08-08 18:36:25")
+        expect(messages).to receive(:send).with(
+          'Some message JSON',
+          false,
+          nil,
+          '2016-08-08 18:36:25'
+        )
         subject
       end
-
-
     end
-
 
     describe 'with template' do
       let!(:template_slug) { 'some-template-slug' }

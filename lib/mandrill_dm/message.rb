@@ -269,10 +269,10 @@ module MandrillDm
     end
 
     def return_time_as_formatted_string(obj)
-      if obj.kind_of?(Date)
-        return Time.new(obj.year, obj.month, obj.day, 0, 0, 0, "+00:00").strftime("%Y-%m-%d %H:%M:%S")
-      elsif obj.kind_of?(Time)
-        return obj.utc.strftime("%Y-%m-%d %H:%M:%S")
+      if obj.is_a?(Date)
+        return Time.new(obj.year, obj.month, obj.day, 0, 0, 0, '+00:00').strftime('%Y-%m-%d %H:%M:%S')
+      elsif (obj.is_a?(Time) || obj.is_a?(DateTime))
+        return obj.utc.strftime('%Y-%m-%d %H:%M:%S')
       else
         return obj
       end

@@ -11,7 +11,7 @@ describe MandrillDm::DeliveryMethod do
   end
 
   context '#deliver!' do
-    let(:msg_methods)  { {'date=' => nil, 'date' => nil} }
+    let(:msg_methods)  { { 'date=' => nil, 'date' => nil } }
     let(:mail_message) { instance_double(Mail::Message, msg_methods) }
     let(:api_key)      { '1234567890' }
     let(:async)        { false }

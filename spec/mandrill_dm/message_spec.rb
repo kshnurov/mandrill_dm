@@ -373,7 +373,6 @@ describe MandrillDm::Message do
       message = described_class.new(mail)
       expect(message.metadata).to be_nil
     end
-
   end
 
   describe '#preserve_recipients' do
@@ -413,29 +412,30 @@ describe MandrillDm::Message do
   end
 
   describe '#send_at' do
-    # from API docs: this message should be sent as a UTC timestamp in YYYY-MM-DD HH:MM:SS format
+    # from API docs: this message should be sent as a
+    # UTC timestamp in YYYY-MM-DD HH:MM:SS format
     it 'takes a send_at Time object and converts to format expected by Mandrill' do
-      mail = new_mail(send_at: Time.new(2016, 8, 8, 13, 36, 25, "-05:00"))
+      mail = new_mail(send_at: Time.new(2016, 8, 8, 13, 36, 25, '-05:00'))
       message = described_class.new(mail)
-      expect(message.send_at).to eq("2016-08-08 18:36:25")
+      expect(message.send_at).to eq('2016-08-08 18:36:25')
     end
 
     it 'takes a send_at Date object and converts to format expected by Mandrill' do
       mail = new_mail(send_at: Date.new(2016, 8, 8))
       message = described_class.new(mail)
-      expect(message.send_at).to eq("2016-08-08 00:00:00")
+      expect(message.send_at).to eq('2016-08-08 00:00:00')
     end
 
     it 'takes a send_at DateTime object and converts to format expected by Mandrill' do
       mail = new_mail(send_at: DateTime.new(2016, 8, 8))
       message = described_class.new(mail)
-      expect(message.send_at).to eq("2016-08-08 00:00:00")
+      expect(message.send_at).to eq('2016-08-08 00:00:00')
     end
 
     it 'takes a send_at String object and passes it directly to Mandrill' do
-      mail = new_mail(send_at: "2016-08-08 00:00:00")
+      mail = new_mail(send_at: '2016-08-08 00:00:00')
       message = described_class.new(mail)
-      expect(message.send_at).to eq("2016-08-08 00:00:00")
+      expect(message.send_at).to eq('2016-08-08 00:00:00')
     end
 
     it 'does not take send_at value' do
@@ -443,7 +443,6 @@ describe MandrillDm::Message do
       message = described_class.new(mail)
       expect(message.send_at).to be_nil
     end
-
   end
 
   describe '#signing_domain' do

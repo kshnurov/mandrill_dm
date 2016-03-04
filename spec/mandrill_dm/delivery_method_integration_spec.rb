@@ -89,7 +89,12 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
       end
 
       it 'contains the provided body as HTML' do
-        expect(messages).to receive(:send).with(hash_including(html: body), false, nil, nil)
+        expect(messages).to receive(:send).with(
+          hash_including(html: body),
+          false,
+          nil,
+          nil
+        )
 
         subject
       end

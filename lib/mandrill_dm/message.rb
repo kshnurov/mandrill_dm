@@ -271,7 +271,7 @@ module MandrillDm
     def return_time_as_formatted_string(obj)
       if obj.is_a?(Date)
         return Time.new(obj.year, obj.month, obj.day, 0, 0, 0, '+00:00')
-          .strftime('%Y-%m-%d %H:%M:%S')
+                   .strftime('%Y-%m-%d %H:%M:%S')
       elsif obj.is_a?(Time) || obj.is_a?(DateTime)
         return obj.utc.strftime('%Y-%m-%d %H:%M:%S')
       else

@@ -213,9 +213,12 @@ describe MandrillDm::Message do
       expect(message.html).to eq('<html><body>Hello world!</body></html>')
     end
 
-
     it 'does not takes a text message' do
-      mail = new_mail(to: 'name@domain.tld', body: 'Hello world!', content_type: 'text/plain')
+      mail = new_mail(
+        to: 'name@domain.tld',
+        body: 'Hello world!',
+        content_type: 'text/plain'
+      )
       message = described_class.new(mail)
       expect(message.html).to eq(nil)
     end
@@ -463,7 +466,11 @@ describe MandrillDm::Message do
     end
 
     it 'takes a text message' do
-      mail = new_mail(to: 'name@domain.tld', body: 'Hello world!', content_type: 'text/plain')
+      mail = new_mail(
+        to: 'name@domain.tld',
+        body: 'Hello world!',
+        content_type: 'text/plain'
+      )
       message = described_class.new(mail)
       expect(message.text).to eq('Hello world!')
     end

@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake'
   s.add_development_dependency 'simplecov',   '~> 0.11'
   s.add_development_dependency 'rubocop',     '~> 0.36'
+  s.add_development_dependency 'mime-types',  '~> 2'
 end

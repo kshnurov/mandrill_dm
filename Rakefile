@@ -1,11 +1,20 @@
 require 'bundler'
 require 'bundler/gem_tasks'
-require 'rspec/core/rake_task'
-
 Bundler.require(:default, :development)
 
-task default: :spec
+require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new
+
+require 'rubocop/rake_task'
+RuboCop::RakeTask.new
+
+task default: %w(all_checks)
+
+desc 'Run all specs and rubocop checks'
+task :all_checks do
+  Rake::Task['spec'].invoke
+  Rake::Task['rubocop'].invoke
+end
 
 directory 'tmp/coverage'
 desc 'Generates spec coverage results'

@@ -58,7 +58,7 @@ class MyMailer < ActionMailer::Base
       template_content: [ # optional
         {
           name: 'header',
-          content: 'string to replace a *|header|* in your template', 
+          content: 'string to replace a *|header|* in your template',
         },
         {
           name: 'content',
@@ -72,6 +72,7 @@ end
 
 ## Development & Feedback
 
-Questions or problems? Please use the issue tracker. If you would like to contribute to this project, fork this repository. Pull requests appreciated.
+Questions or problems? Please use the issue tracker. If you would like to contribute to this project, fork this repository. Pull requests appreciated! Please ensure all specs and rubocop checks pass locally (run `rake`) and
+verify the travis build matrix passes.
 
 This gem was inspired by the [letter_opener](https://github.com/ryanb/letter_opener/) and [mandrill-delivery-handler](https://github.com/earnold/mandrill-delivery-handler) gems. Special thanks to the folks at MailChimp and Mandrill for their Starter service and [Ruby API](https://bitbucket.org/mailchimp/mandrill-api-ruby).

@@ -53,7 +53,7 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
       it 'contains the provided from address' do
         expect(messages).to(
           receive(:send).with(
-            hash_including(from_name: from_name, from_email: from_email), false
+            hash_including(from_name: from_name, from_email: from_email), false, nil, nil
           )
         )
 
@@ -80,14 +80,21 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
       it 'contains the provided subject' do
         expect(messages).to receive(:send).with(
           hash_including(subject: message_subject),
-          false
+          false,
+          nil,
+          nil
         )
 
         subject
       end
 
       it 'contains the provided body as HTML' do
-        expect(messages).to receive(:send).with(hash_including(html: body), false)
+        expect(messages).to receive(:send).with(
+          hash_including(html: body),
+          false,
+          nil,
+          nil
+        )
 
         subject
       end

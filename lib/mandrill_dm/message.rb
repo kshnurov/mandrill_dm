@@ -61,7 +61,8 @@ module MandrillDm
     end
 
     def html
-      mail.html_part ? mail.html_part.body.decoded : mail.body.decoded
+      return mail.html_part.body.decoded if mail.html_part
+      return mail.body.decoded unless mail.text?
     end
 
     def template
@@ -118,7 +119,7 @@ module MandrillDm
 
     def text
       return mail.text_part.body.decoded if mail.multipart? && mail.text_part
-      nil
+      return mail.body.decoded if mail.text?
     end
 
     def to

@@ -420,6 +420,33 @@ describe MandrillDm::Message do
     end
   end
 
+  describe '#send_at' do
+    it 'takes a string and returns it as is' do
+      mail = new_mail(send_at: '2010-01-01 12:00:00')
+      message = described_class.new(mail)
+      expect(message.send_at).to eq('2010-01-01 12:00:00')
+    end
+
+    it 'takes a Date and returns a string in UTC' do
+      expect_any_instance_of(Date).to receive(:to_time).and_return('2016-01-01 10:00:00')
+      mail = new_mail(send_at: Date.new(2016))
+      message = described_class.new(mail)
+      expect(message.send_at).to eq('2016-01-01 10:00:00')
+    end
+
+    it 'takes a DateTime and returns a string in UTC' do
+      mail = new_mail(send_at: DateTime.parse('2016-01-01 00:00:00 -0800'))
+      message = described_class.new(mail)
+      expect(message.send_at).to eq('2016-01-01 08:00:00')
+    end
+
+    it 'takes a Time and returns a string in UTC' do
+      mail = new_mail(send_at: Time.parse('2016-01-01 00:00:00 -0800'))
+      message = described_class.new(mail)
+      expect(message.send_at).to eq('2016-01-01 08:00:00')
+    end
+  end
+
   describe '#signing_domain' do
     it 'takes a signing_domain' do
       mail = new_mail(signing_domain: 'signing_domain.com')

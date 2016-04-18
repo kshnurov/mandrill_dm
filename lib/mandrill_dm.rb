@@ -1,8 +1,8 @@
 require 'mandrill'
-
-require 'mandrill_dm/message'
-require 'mandrill_dm/delivery_method'
-require 'mandrill_dm/railtie' if defined? Rails
+require 'date'
+require_relative 'mandrill_dm/message'
+require_relative 'mandrill_dm/delivery_method'
+require_relative 'mandrill_dm/railtie' if defined? Rails
 
 module MandrillDm
   class << self

@@ -112,7 +112,7 @@ module MandrillDm
 
     # mandrill expects `send_at` in UTC as `YYYY-MM-DD HH:MM:SS`
     def send_at_formatted_string(obj)
-      obj = obj.to_time if obj.is_a?(Date) || obj.is_a?(DateTime)
+      obj = obj.to_time if obj.is_a?(Date)
       return obj.utc.strftime('%Y-%m-%d %H:%M:%S') if obj.is_a?(Time)
 
       obj

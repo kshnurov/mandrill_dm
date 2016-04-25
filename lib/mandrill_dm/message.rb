@@ -93,6 +93,10 @@ module MandrillDm
       get_value(:merge_vars)
     end
 
+    def metadata
+      get_value(:metadata)
+    end
+
     def preserve_recipients
       nil_true_false?(:preserve_recipients)
     end
@@ -161,6 +165,7 @@ module MandrillDm
         merge: merge,
         merge_language: merge_language,
         merge_vars: merge_vars,
+        metadata: metadata,
         preserve_recipients: preserve_recipients,
         return_path_domain: return_path_domain,
         signing_domain: signing_domain,

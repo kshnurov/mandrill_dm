@@ -370,7 +370,19 @@ describe MandrillDm::Message do
     end
   end
 
-  pending '#metadata'
+  describe '#metadata' do
+    it 'takes a metadata with a hash' do
+      mail = new_mail(metadata: { mail_internal_id: 'nice-uuid-field' })
+      message = described_class.new(mail)
+      expect(message.metadata).to eq('mail_internal_id' => 'nice-uuid-field')
+    end
+
+    it 'does not take metadata value' do
+      mail = new_mail
+      message = described_class.new(mail)
+      expect(message.metadata).to be_nil
+    end
+  end
 
   describe '#preserve_recipients' do
     it 'takes a preserve_recipients with true' do
@@ -669,6 +681,15 @@ describe MandrillDm::Message do
       message = described_class.new(mail)
       expect(message.to_json).to(
         include(:from_email, :from_name, :html, :subject, :to, :attachments)
+      )
+    end
+
+    it 'returns a proper JSON response for the Mandrill API with metadata' do
+      mail = new_mail(body: 'test', from: 'name@domain.tld', metadata: { foo: 'bar' })
+
+      message = described_class.new(mail)
+      expect(message.to_json).to(
+        include(:from_email, :from_name, :html, :subject, :to, :metadata)
       )
     end
   end

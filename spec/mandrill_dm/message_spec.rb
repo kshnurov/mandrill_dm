@@ -421,17 +421,16 @@ describe MandrillDm::Message do
   end
 
   describe '#send_at' do
+    it 'takes a Date and raises an ArgumentError' do
+      mail = new_mail(send_at: Date.new(2016))
+      message = described_class.new(mail)
+      expect { message.send_at }.to raise_error(ArgumentError)
+    end
+
     it 'takes a string and returns it as is' do
       mail = new_mail(send_at: '2010-01-01 12:00:00')
       message = described_class.new(mail)
       expect(message.send_at).to eq('2010-01-01 12:00:00')
-    end
-
-    it 'takes a Date and returns a string in UTC' do
-      expect_any_instance_of(Date).to receive(:to_time).and_return('2016-01-01 10:00:00')
-      mail = new_mail(send_at: Date.new(2016))
-      message = described_class.new(mail)
-      expect(message.send_at).to eq('2016-01-01 10:00:00')
     end
 
     it 'takes a DateTime and returns a string in UTC' do

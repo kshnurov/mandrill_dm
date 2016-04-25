@@ -112,10 +112,12 @@ module MandrillDm
 
     # mandrill expects `send_at` in UTC as `YYYY-MM-DD HH:MM:SS`
     def send_at_formatted_string(obj)
-      obj = obj.to_time if obj.is_a?(Date)
+      return obj if obj.is_a?(String)
+
+      obj = obj.to_time if obj.is_a?(DateTime)
       return obj.utc.strftime('%Y-%m-%d %H:%M:%S') if obj.is_a?(Time)
 
-      obj
+      raise ArgumentError, 'send_at should be Time/DateTime or String'
     end
 
     def signing_domain

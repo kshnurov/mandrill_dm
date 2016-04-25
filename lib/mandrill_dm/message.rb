@@ -105,6 +105,21 @@ module MandrillDm
       return_string_value(:return_path_domain)
     end
 
+    def send_at
+      value = get_value(:send_at)
+      value ? send_at_formatted_string(value) : nil
+    end
+
+    # mandrill expects `send_at` in UTC as `YYYY-MM-DD HH:MM:SS`
+    def send_at_formatted_string(obj)
+      return obj if obj.is_a?(String)
+
+      obj = obj.to_time if obj.is_a?(DateTime)
+      return obj.utc.strftime('%Y-%m-%d %H:%M:%S') if obj.is_a?(Time)
+
+      raise ArgumentError, 'send_at should be Time/DateTime or String'
+    end
+
     def signing_domain
       return_string_value(:signing_domain)
     end

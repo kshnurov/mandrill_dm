@@ -76,3 +76,7 @@ Questions or problems? Please use the issue tracker. If you would like to contri
 verify the travis build matrix passes.
 
 This gem was inspired by the [letter_opener](https://github.com/ryanb/letter_opener/) and [mandrill-delivery-handler](https://github.com/earnold/mandrill-delivery-handler) gems. Special thanks to the folks at MailChimp and Mandrill for their Starter service and [Ruby API](https://bitbucket.org/mailchimp/mandrill-api-ruby).
+
+### Interactive Usage
+  $ irb -I . -r 'lib/mandrill_dm'
+  > require 'pry'

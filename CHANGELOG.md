@@ -1,4 +1,4 @@
-### 1.3.0 (2016-04-25)
+### 1.3.1 (2016-04-25)
 
 - [#43](https://github.com/spovich/mandrill_dm/pull/43) add send_at support, thanks @sbauch, @kshnurov
 - [#42](https://github.com/spovich/mandrill_dm/pull/42) add metadata support, thanks @sbauch

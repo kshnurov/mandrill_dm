@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'mandrill_dm'
-  s.version = '1.3.0'
+  s.version = '1.3.1'
   s.date = '2016-04-25'
   s.summary = 'A basic Mandrill delivery method for Rails.'
   s.description = 'A basic Mandrill delivery method for Rails.'

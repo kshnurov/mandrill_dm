@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{lib,spec}/**/*', '[A-Z]*'] - ['Gemfile.lock']
   s.require_path = 'lib'
+  s.required_ruby_version = '>= 2.0'
 
   s.add_dependency 'mandrill-api',            '~> 1.0.53'
 

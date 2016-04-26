@@ -1,5 +1,10 @@
-### Unreleased
+### 1.3.0 (2016-04-25)
 
+- [#43](https://github.com/spovich/mandrill_dm/pull/43) add send_at support, thanks @sbauch, @kshnurov
+- [#42](https://github.com/spovich/mandrill_dm/pull/42) add metadata support, thanks @sbauch
+- [#40](https://github.com/spovich/mandrill_dm/pull/40) drop official support for 1.9.3, ymmv
+- [#39](https://github.com/spovich/mandrill_dm/pull/39) fix sending of text-only emails, thanks @piotrze
+- [#26](https://github.com/spovich/mandrill_dm/pull/26) add mandrill template support, thanks @genaromadrid
 - [#32](https://github.com/spovich/mandrill_dm/pull/32) fix compatibility with `mail` gem >= 2.5.x (rails 3.2+), thanks @sysqa
 - [#23](https://github.com/spovich/mandrill_dm/pull/23) global_merge_vars support, thanks @sysqa
 - [#7](https://github.com/spovich/mandrill_dm/pull/7) asynchronous message support, thanks @beorc

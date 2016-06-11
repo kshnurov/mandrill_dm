@@ -187,7 +187,8 @@ describe MandrillDm::Message do
     it 'takes a non-multipart message' do
       mail = new_mail(
         to: 'name@domain.tld',
-        body: '<html><body>Hello world!</body></html>'
+        body: '<html><body>Hello world!</body></html>',
+        content_type: 'text/html'
       )
 
       message = described_class.new(mail)

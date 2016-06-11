@@ -277,7 +277,6 @@ module MandrillDm
     end
 
     def html_content?
-      return true if mail.content_type.nil?
       mail.content_type =~ %r{text/html} ? true : false
     end
 

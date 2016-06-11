@@ -223,6 +223,17 @@ describe MandrillDm::Message do
       message = described_class.new(mail)
       expect(message.html).to eq(nil)
     end
+
+    it 'does not take a with the wrong content type' do
+      mail = new_mail(
+        to: 'name@domain.tld',
+        body: '<html><body>Hello world!</body></html>',
+        content_type: 'anytext/html5'
+      )
+
+      message = described_class.new(mail)
+      expect(message.html).to eq(nil)
+    end
   end
 
   describe '#images' do
@@ -500,6 +511,17 @@ describe MandrillDm::Message do
   describe '#text' do
     it 'does not take a non-multipart message' do
       mail = new_mail(to: 'name@domain.tld', body: 'Hello world!')
+      message = described_class.new(mail)
+      expect(message.text).to eq(nil)
+    end
+
+    it 'does not take a with the wrong content type' do
+      mail = new_mail(
+        to: 'name@domain.tld',
+        body: 'Hello world!',
+        content_type: 'anytext/plain'
+      )
+
       message = described_class.new(mail)
       expect(message.text).to eq(nil)
     end

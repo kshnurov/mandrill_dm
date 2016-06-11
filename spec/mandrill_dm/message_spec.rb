@@ -224,7 +224,7 @@ describe MandrillDm::Message do
       expect(message.html).to eq(nil)
     end
 
-    it 'does not take a with the wrong content type' do
+    it 'does not take with the wrong content type' do
       mail = new_mail(
         to: 'name@domain.tld',
         body: '<html><body>Hello world!</body></html>',
@@ -515,7 +515,7 @@ describe MandrillDm::Message do
       expect(message.text).to eq(nil)
     end
 
-    it 'does not take a with the wrong content type' do
+    it 'does not take with the wrong content type' do
       mail = new_mail(
         to: 'name@domain.tld',
         body: 'Hello world!',

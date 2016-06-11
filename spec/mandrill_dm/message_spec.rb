@@ -234,6 +234,17 @@ describe MandrillDm::Message do
       message = described_class.new(mail)
       expect(message.html).to eq(nil)
     end
+    
+    it 'takes with more thing in the content type' do
+      mail = new_mail(
+        to: 'name@domain.tld',
+        body: '<html><body>Hello world!</body></html>',
+        content_type: 'text/html; charset="us-ascii"'
+      )
+
+      message = described_class.new(mail)
+      expect(message.html).to eq('<html><body>Hello world!</body></html>')
+    end
   end
 
   describe '#images' do
@@ -524,6 +535,17 @@ describe MandrillDm::Message do
 
       message = described_class.new(mail)
       expect(message.text).to eq(nil)
+    end
+
+    it 'takes with more thing in the content type' do
+      mail = new_mail(
+        to: 'name@domain.tld',
+        body: 'Hello world!',
+        content_type: 'text/plain; charset="us-ascii"'
+      )
+
+      message = described_class.new(mail)
+      expect(message.html).to eq('Hello world!')
     end
 
     it 'takes a text message' do

@@ -277,11 +277,11 @@ module MandrillDm
     end
 
     def html_content?
-      mail.content_type =~ %r{\btext/html\b} ? true : false
+      mail.mime_type == 'text/html' ? true : false
     end
 
     def text_content?
-      mail.content_type =~ %r{\btext/plain\b} ? true : false
+      mail.mime_type == 'text/plain' ? true : false
     end
 
     def return_string_value(field)

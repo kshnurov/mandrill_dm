@@ -54,7 +54,8 @@ describe MandrillDm::DeliveryMethod do
         'Some message JSON',
         false,
         nil,
-        nil)
+        nil
+      )
 
       subject
     end

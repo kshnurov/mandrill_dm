@@ -57,12 +57,12 @@ class MyMailer < ActionMailer::Base
       template: 'your-mandrill-template-slug',
       template_content: [ # optional
         {
-          name: 'header',
-          content: 'string to replace a *|header|* in your template',
+          name: 'header', # the name of the mc:edit editable region to inject into
+          content: 'string to replace a mc:edit="header" in your template', # the content to inject
         },
         {
           name: 'content',
-          content: 'string to replace a *|content|* in your template'
+          content: 'string to replace a mc:edit="content" in your template'
         }
       ]
     )

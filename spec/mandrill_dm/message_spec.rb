@@ -187,7 +187,8 @@ describe MandrillDm::Message do
     it 'takes a non-multipart message' do
       mail = new_mail(
         to: 'name@domain.tld',
-        body: '<html><body>Hello world!</body></html>'
+        body: '<html><body>Hello world!</body></html>',
+        content_type: 'text/html'
       )
 
       message = described_class.new(mail)
@@ -221,6 +222,28 @@ describe MandrillDm::Message do
       )
       message = described_class.new(mail)
       expect(message.html).to eq(nil)
+    end
+
+    it 'does not take with the wrong content type' do
+      mail = new_mail(
+        to: 'name@domain.tld',
+        body: '<html><body>Hello world!</body></html>',
+        content_type: 'anytext/html5'
+      )
+
+      message = described_class.new(mail)
+      expect(message.html).to eq(nil)
+    end
+
+    it 'takes with more thing in the content type' do
+      mail = new_mail(
+        to: 'name@domain.tld',
+        body: '<html><body>Hello world!</body></html>',
+        content_type: 'text/html; charset="us-ascii"'
+      )
+
+      message = described_class.new(mail)
+      expect(message.html).to eq('<html><body>Hello world!</body></html>')
     end
   end
 
@@ -501,6 +524,28 @@ describe MandrillDm::Message do
       mail = new_mail(to: 'name@domain.tld', body: 'Hello world!')
       message = described_class.new(mail)
       expect(message.text).to eq(nil)
+    end
+
+    it 'does not take with the wrong content type' do
+      mail = new_mail(
+        to: 'name@domain.tld',
+        body: 'Hello world!',
+        content_type: 'anytext/plain'
+      )
+
+      message = described_class.new(mail)
+      expect(message.text).to eq(nil)
+    end
+
+    it 'takes with more thing in the content type' do
+      mail = new_mail(
+        to: 'name@domain.tld',
+        body: 'Hello world!',
+        content_type: 'text/plain; charset="us-ascii"'
+      )
+
+      message = described_class.new(mail)
+      expect(message.text).to eq('Hello world!')
     end
 
     it 'takes a text message' do

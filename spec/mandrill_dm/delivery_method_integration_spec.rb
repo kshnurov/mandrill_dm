@@ -14,6 +14,7 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
     let(:bcc)             { (1..3).map { |i| "Bcc #{i} <bcc_#{i}@domain.tld>" } }
     let(:message_subject) { 'Some Message Subject' }
     let(:body)            { 'Some Message Body' }
+    let(:content_type)    { 'text/html' }
 
     let(:api)      { instance_double(Mandrill::API) }
     let(:messages) { instance_double(Mandrill::Messages, send: {}) }
@@ -32,6 +33,7 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
         bcc example.bcc
         subject example.message_subject
         body example.body
+        content_type example.content_type
       end
     end
 

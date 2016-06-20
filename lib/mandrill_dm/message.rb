@@ -62,7 +62,7 @@ module MandrillDm
 
     def html
       return mail.html_part.body.decoded if mail.html_part
-      return mail.body.decoded unless mail.text?
+      return_decoded_body('text/html')
     end
 
     def template
@@ -137,8 +137,8 @@ module MandrillDm
     end
 
     def text
-      return mail.text_part.body.decoded if mail.multipart? && mail.text_part
-      return mail.body.decoded if mail.text?
+      return mail.text_part.body.decoded if mail.text_part
+      return_decoded_body('text/plain')
     end
 
     def to
@@ -274,6 +274,10 @@ module MandrillDm
 
     def inline_attachments?
       mail.attachments.any?(&:inline?)
+    end
+
+    def return_decoded_body(mime_type)
+      mail.mime_type == mime_type ? mail.body.decoded : nil
     end
 
     def return_string_value(field)

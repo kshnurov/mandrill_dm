@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'mandrill_dm'
-  s.version = '1.3.1'
-  s.date = '2016-04-25'
+  s.version = '1.3.2'
+  s.date = '2016-06-21'
   s.summary = 'A basic Mandrill delivery method for Rails.'
   s.description = 'A basic Mandrill delivery method for Rails.'
   s.authors = ['Jonathan Berglund', 'John Dell', 'Kirill Shnurov']
@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mail',        '~> 2.6'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'simplecov',   '~> 0.11'
-  s.add_development_dependency 'rubocop',     '~> 0.39'
+  s.add_development_dependency 'rubocop',     '~> 0.40'
   s.add_development_dependency 'pry'
 end

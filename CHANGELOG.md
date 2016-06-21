@@ -1,3 +1,7 @@
+### 1.3.2 (2016-06-21)
+
+- [#45](https://github.com/spovich/mandrill_dm/pull/45) fix issue with html only email as plain text, thanks @sysqa
+
 ### 1.3.1 (2016-04-25)
 
 - [#43](https://github.com/spovich/mandrill_dm/pull/43) add send_at support, thanks @sbauch, @kshnurov

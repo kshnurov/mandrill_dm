@@ -1,12 +1,28 @@
 require 'spec_helper'
 
 describe MandrillDm::DeliveryMethod do
-  let(:options)         { { 'some_option_key' => 'some option value' } }
-  let(:delivery_method) { MandrillDm::DeliveryMethod.new(options) }
+  let(:api_key)         { 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' }
+  subject(:delivery_method) { MandrillDm::DeliveryMethod.new }
+
+  before do
+    allow(MandrillDm).to receive_message_chain(
+      :configuration,
+      :api_key
+    ).and_return(api_key)
+  end
 
   context '#initialize' do
-    it 'sets passed options to `settings` attr_accesor' do
-      expect(delivery_method.settings).to eql(options)
+    it 'sets default settings' do
+      expect(delivery_method.settings).to eql(api_key: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    end
+
+    context 'with options' do
+      let(:options) { { api_key: 'ZYXWVUTSRQPONMLKJIHGFEDCBA' } }
+      subject(:delivery_method) { MandrillDm::DeliveryMethod.new(options) }
+
+      it 'merges with default settings' do
+        expect(delivery_method.settings).to eql(api_key: 'ZYXWVUTSRQPONMLKJIHGFEDCBA')
+      end
     end
   end
 
@@ -20,7 +36,7 @@ describe MandrillDm::DeliveryMethod do
     let(:messages)     { instance_double(Mandrill::Messages, msgs_methods) }
     let(:api)          { instance_double(Mandrill::API, messages: messages) }
 
-    before(:each) do
+    before do
       allow(Mandrill::API).to receive(:new).and_return(api)
       allow(dm_message).to receive(:template).and_return(nil)
       allow(MandrillDm).to receive_message_chain(
@@ -71,7 +87,7 @@ describe MandrillDm::DeliveryMethod do
     end
 
     describe 'with a send_at time' do
-      before(:each) do
+      before do
         allow(dm_message).to receive(:send_at).and_return('2016-08-08 18:36:25')
       end
 
@@ -108,7 +124,7 @@ describe MandrillDm::DeliveryMethod do
       let!(:html) { '<some>html</some>' }
       let!(:message_json) { { html: html } }
 
-      before(:each) do
+      before do
         allow(dm_message).to receive(:to_json).and_return(message_json)
         allow(dm_message).to receive(:template).and_return(template_slug)
         allow(dm_message).to receive(:template_content).and_return(

@@ -3,13 +3,15 @@ module MandrillDm
     attr_accessor :settings, :response
 
     def initialize(options = {})
-      @settings = options
+      @settings = {
+        api_key: MandrillDm.configuration.api_key
+      }.merge!(options)
     end
 
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize
     def deliver!(mail)
-      mandrill_api = Mandrill::API.new(MandrillDm.configuration.api_key)
+      mandrill_api = Mandrill::API.new(settings[:api_key])
       message = Message.new(mail)
       if message.template
         @response = mandrill_api.messages.send_template(

@@ -44,7 +44,7 @@ Option     | Default value     | Description
 
 ### Mandrill Templates
 
-If you want to use this gem with mandrill templates you just have to add the `template` param to the `mail` function.
+If you want to use this gem with mandrill templates you just have to add the `template` param to the `mail` function and set the `body` param to empty string `''`.
 
 > We use `template` instead of `template_name` as described in mandrill documentation since `template_name` it's used by [ActionMailer](http://api.rubyonrails.org/classes/ActionMailer/Base.html).
 
@@ -54,6 +54,7 @@ class MyMailer < ActionMailer::Base
     mail(
       to: email,
       from: 'your@email.com',
+      body: '',
       template: 'your-mandrill-template-slug',
       template_content: [ # optional
         {

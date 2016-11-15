@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe MandrillDm::DeliveryMethod do
-  let(:api_key)         { 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' }
+  let(:api_key) { 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' }
   subject(:delivery_method) { MandrillDm::DeliveryMethod.new }
 
   before do

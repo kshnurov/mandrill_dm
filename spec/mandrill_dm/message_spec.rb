@@ -152,34 +152,19 @@ describe MandrillDm::Message do
   pending '#google_analytics_campaign'
 
   describe '#headers' do
-    def check_header(header)
-      mail = new_mail(headers: header)
-      message = described_class.new(mail)
-      expect(message.headers).to eq(header)
+    let(:headers) do
+      {
+        'Reply-To' => 'name1@domain.tld',
+        'X-MC-BccAddress' => 'name1@domain.tld',
+        'X-MY-CUSTOM-HEADER' => 'whatever'
+      }
     end
 
-    it 'adds `Reply-To` header' do
-      check_header 'Reply-To' => 'name1@domain.tld'
-    end
+    let(:mail) { new_mail(headers: headers) }
+    subject { described_class.new(mail) }
 
-    it 'adds `X-MC-BccAddress` header' do
-      check_header 'X-MC-BccAddress' => 'name1@domain.tld'
-    end
-
-    it 'adds `X-MC-GoogleAnalytics` header' do
-      check_header 'X-MC-GoogleAnalytics' => 'foo.com, bar.com'
-    end
-
-    it 'adds `X-MC-GoogleAnalyticsCampaign` header' do
-      check_header 'X-MC-GoogleAnalyticsCampaign' => 'foo@bar.com'
-    end
-
-    it 'adds `X-MC-Track` header' do
-      check_header 'X-MC-Track' => 'opens, clicks_htmlonly'
-    end
-
-    it 'adds `X-MC-URLStripQS` header' do
-      check_header 'X-MC-URLStripQS' => 'true'
+    it 'returns all headers' do
+      expect(subject.headers).to eq(headers)
     end
   end
 

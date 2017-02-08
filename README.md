@@ -52,6 +52,7 @@ If you want to use this gem with mandrill templates you just have to add the `te
 ```ruby
 class MyMailer < ActionMailer::Base
   def notify_user(email)
+    headers['Reply-To'] = 'your.friend@email.com'
     mail(
       to: email,
       from: 'your@email.com',

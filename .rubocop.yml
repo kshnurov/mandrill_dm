@@ -4,6 +4,14 @@ Style/AccessModifierIndentation:
 Metrics/LineLength:
   Max: 90
 
+Metrics/BlockLength:
+  CountComments: false
+  Max: 25
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+
 Style/Documentation:
   Enabled: false
 

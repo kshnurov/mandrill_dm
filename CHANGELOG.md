@@ -1,3 +1,9 @@
+### Unreleased
+
+- [#51](https://github.com/spovich/mandrill_dm/pull/51) Send all passed headers to Mandrill, thanks @tensho
+- [#49](https://github.com/spovich/mandrill_dm/pull/49) Update readme for use of mandrill templates, thanks @januszm
+- [#48](https://github.com/spovich/mandrill_dm/pull/48) Merge settings and options (multiple api keys), thanks @tensho
+
 ### 1.3.2 (2016-06-21)
 
 - [#45](https://github.com/spovich/mandrill_dm/pull/45) fix issue with html only email as plain text, thanks @sysqa

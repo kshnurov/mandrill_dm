@@ -57,7 +57,9 @@ module MandrillDm
     end
 
     def headers
-      combine_extra_header_fields
+      mail.header_fields.reduce({}) do |acc, field|
+        acc.merge(field.name => field.value)
+      end
     end
 
     def html
@@ -212,32 +214,6 @@ module MandrillDm
     def combine_address_fields
       %w(to cc bcc).map do |field|
         hash_addresses(mail[field])
-      end
-    end
-
-    # Returns a hash of extra headers (not complete)
-    def combine_extra_header_fields # rubocop:disable MethodLength
-      %w(
-        Reply-To
-        X-MC-AutoText
-        X-MC-BccAddress
-        X-MC-GoogleAnalytics
-        X-MC-GoogleAnalyticsCampaign
-        X-MC-Important
-        X-MC-InlineCSS
-        X-MC-IpPool
-        X-MC-MergeVars
-        X-MC-PreserveRecipients
-        X-MC-ReturnPathDomain
-        X-MC-SigningDomain
-        X-MC-Subaccount
-        X-MC-Template
-        X-MC-Track
-        X-MC-TrackingDomain
-        X-MC-URLStripQS
-        X-MC-ViewContentLink
-      ).each_with_object({}) do |field, headers|
-        headers[field] = mail[field].to_s if mail[field]
       end
     end
 

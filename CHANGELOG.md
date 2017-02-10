@@ -1,4 +1,4 @@
-### Unreleased
+### 1.3.3 (2017-02-09)
 
 - [#52](https://github.com/spovich/mandrill_dm/pull/52) Mail gem should be a runtime dependency, thanks @tensho
 - [#51](https://github.com/spovich/mandrill_dm/pull/51) Send all passed headers to Mandrill, thanks @tensho

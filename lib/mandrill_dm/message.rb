@@ -216,7 +216,7 @@ module MandrillDm
 
     # Returns a single, flattened hash with all to, cc, and bcc addresses
     def combine_address_fields
-      %w(to cc bcc).map do |field|
+      %w[to cc bcc].map do |field|
         hash_addresses(mail[field])
       end
     end

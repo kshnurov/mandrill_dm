@@ -107,6 +107,10 @@ module MandrillDm
       return_string_value(:return_path_domain)
     end
 
+    def ip_pool
+      return_string_value(:ip_pool)
+    end
+
     def send_at
       value = get_value(:send_at)
       value ? send_at_formatted_string(value) : nil

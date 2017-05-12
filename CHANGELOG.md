@@ -1,3 +1,7 @@
+### Unreleased
+
+- [#55](https://github.com/spovich/mandrill_dm/pull/55) Set default ip pool and override with each message, thanks @dorongutman
+
 ### 1.3.3 (2017-02-09)
 
 - [#52](https://github.com/spovich/mandrill_dm/pull/52) Mail gem should be a runtime dependency, thanks @tensho

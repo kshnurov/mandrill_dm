@@ -19,14 +19,14 @@ module MandrillDm
                       message.template_content,
                       message.to_json,
                       MandrillDm.configuration.async,
-                      nil,
+                      message.ip_pool || MandrillDm.configuration.ip_pool,
                       message.send_at
                     )
                   else
                     mandrill_api.messages.send(
                       message.to_json,
                       MandrillDm.configuration.async,
-                      nil,
+                      message.ip_pool || MandrillDm.configuration.ip_pool,
                       message.send_at
                     )
                   end

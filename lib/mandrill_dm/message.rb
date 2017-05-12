@@ -83,6 +83,10 @@ module MandrillDm
       nil_true_false?(:inline_css)
     end
 
+    def ip_pool
+      return_string_value(:ip_pool)
+    end
+
     def merge
       nil_true_false?(:merge)
     end

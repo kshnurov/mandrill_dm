@@ -27,14 +27,15 @@ describe MandrillDm::DeliveryMethod do
   end
 
   context '#deliver!' do
-    let(:mail_message) { instance_double(Mail::Message) }
+    let(:api)          { instance_double(Mandrill::API, messages: messages) }
     let(:api_key)      { '1234567890' }
     let(:async)        { false }
     let(:dm_message)   { instance_double(MandrillDm::Message) }
-    let(:response)     { { 'some_response_key' => 'some response value' } }
-    let(:msgs_methods) { { send: response, send_template: response } }
+    let(:ip_pool)      { nil }
+    let(:mail_message) { instance_double(Mail::Message) }
     let(:messages)     { instance_double(Mandrill::Messages, msgs_methods) }
-    let(:api)          { instance_double(Mandrill::API, messages: messages) }
+    let(:msgs_methods) { { send: response, send_template: response } }
+    let(:response)     { { 'some_response_key' => 'some response value' } }
 
     before do
       allow(Mandrill::API).to receive(:new).and_return(api)
@@ -43,9 +44,14 @@ describe MandrillDm::DeliveryMethod do
         :configuration,
         :api_key
       ).and_return(api_key)
+      allow(MandrillDm).to receive_message_chain(
+        :configuration,
+        :ip_pool
+      ).and_return(ip_pool)
       allow(MandrillDm).to receive_message_chain(:configuration, :async).and_return(async)
       allow(MandrillDm::Message).to receive(:new).and_return(dm_message)
       allow(dm_message).to receive(:send_at).and_return(nil)
+      allow(dm_message).to receive(:ip_pool).and_return(nil)
     end
 
     subject { delivery_method.deliver!(mail_message) }

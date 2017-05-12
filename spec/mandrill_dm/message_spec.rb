@@ -498,9 +498,9 @@ describe MandrillDm::Message do
     end
 
     it 'takes an array of tags' do
-      mail = new_mail(tags: %w(test_tag1 test_tag2))
+      mail = new_mail(tags: %w[test_tag1 test_tag2])
       message = described_class.new(mail)
-      expect(message.tags).to eq(%w(test_tag1 test_tag2))
+      expect(message.tags).to eq(%w[test_tag1 test_tag2])
     end
   end
 

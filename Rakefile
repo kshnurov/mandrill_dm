@@ -8,7 +8,7 @@ RSpec::Core::RakeTask.new
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new
 
-task default: %w(all_checks)
+task default: %w[all_checks]
 
 desc 'Run all specs and rubocop checks'
 task :all_checks do

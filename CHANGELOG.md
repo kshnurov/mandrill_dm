@@ -1,4 +1,4 @@
-### Unreleased
+### 1.3.4 (2017-05-28)
 
 - [#55](https://github.com/spovich/mandrill_dm/pull/55) Set default ip pool and override with each message, thanks @dorongutman
 

@@ -1,4 +1,3 @@
-
 # Mandrill DM
 
 [![Build Status](https://travis-ci.org/spovich/mandrill_dm.svg?branch=master)](https://travis-ci.org/spovich/mandrill_dm)

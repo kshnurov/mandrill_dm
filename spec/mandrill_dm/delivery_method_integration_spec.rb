@@ -66,7 +66,7 @@ describe MandrillDm::DeliveryMethod, 'integrating with the Mail API', integratio
       end
 
       %w[to cc bcc].each do |recipient_type|
-        it 'contains the provided #{recipient_type} addresses' do
+        it "contains the provided #{recipient_type} addresses" do
           expect(messages).to receive(:send) do |message_hash|
             (1..3).each do |i|
               expected_recipient = {

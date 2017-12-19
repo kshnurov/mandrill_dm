@@ -76,7 +76,7 @@ module MandrillDm
     end
 
     def important
-      mail[:important].to_s == 'true' ? true : false
+      mail[:important].to_s == 'true'
     end
 
     def inline_css

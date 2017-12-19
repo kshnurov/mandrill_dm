@@ -1,6 +1,6 @@
 HEAD
 
-- Update mail gem dependency to ~> 2.7
+- Update mail gem dependency to ~> 2.7. Fix initial field (header) value retrieving
 
 ### 1.3.4 (2017-05-28)
 

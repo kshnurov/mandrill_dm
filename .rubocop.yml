@@ -1,8 +1,8 @@
-Style/AccessModifierIndentation:
-  EnforcedStyle: outdent
+AllCops:
+  TargetRubyVersion: 2.0
 
-Metrics/LineLength:
-  Max: 90
+Layout/AccessModifierIndentation:
+  EnforcedStyle: outdent
 
 Metrics/BlockLength:
   CountComments: false
@@ -11,6 +11,9 @@ Metrics/BlockLength:
     - 'Rakefile'
     - '**/*.rake'
     - 'spec/**/*.rb'
+
+Metrics/LineLength:
+  Max: 90
 
 Style/Documentation:
   Enabled: false

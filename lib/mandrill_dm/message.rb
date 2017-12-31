@@ -76,7 +76,7 @@ module MandrillDm
     end
 
     def important
-      mail[:important].to_s == 'true' ? true : false
+      mail[:important].to_s == 'true'
     end
 
     def inline_css
@@ -231,7 +231,13 @@ module MandrillDm
     # `mail[:merge_vars].value` returns the variables pre-processed,
     # `instance_variable_get('@value')` returns them exactly as they were passed in
     def get_value(field)
-      mail[field] ? mail[field].instance_variable_get('@value') : nil
+      return nil unless mail[field]
+
+      if mail[field].instance_variable_defined?('@unparsed_value')
+        mail[field].instance_variable_get('@unparsed_value') # mail gem 2.7+
+      else
+        mail[field].instance_variable_get('@value') # mail gem <= 2.6
+      end
     end
 
     # Returns a Mandrill API compatible email address hash

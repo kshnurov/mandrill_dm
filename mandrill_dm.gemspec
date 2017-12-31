@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'mandrill_dm'
-  s.version = '1.3.4'
-  s.date = '2017-05-28'
+  s.version = '1.3.5'
+  s.date = '2017-12-30'
   s.summary = 'A basic Mandrill delivery method for Rails.'
   s.description = 'A basic Mandrill delivery method for Rails.'
   s.authors = ['Jonathan Berglund', 'John Dell', 'Kirill Shnurov']
@@ -13,12 +13,12 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.required_ruby_version = '>= 2.0'
 
-  s.add_dependency 'mail',                    '~> 2.6'
+  s.add_dependency 'mail',                    '>= 2.6'
   s.add_dependency 'mandrill-api',            '~> 1.0.53'
 
-  s.add_development_dependency 'rspec',       '~> 3.4'
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'simplecov',   '~> 0.13'
-  s.add_development_dependency 'rubocop',     '~> 0.47'
   s.add_development_dependency 'pry'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec',       '~> 3.7.0'
+  s.add_development_dependency 'rubocop',     '0.50.0'
+  s.add_development_dependency 'simplecov',   '~> 0.15.1'
 end

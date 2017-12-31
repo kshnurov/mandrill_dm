@@ -1,3 +1,7 @@
+### 1.3.5 (2017-12-30)
+
+- [#55](https://github.com/spovich/mandrill_dm/pull/60) Add support for mail 2.7, thanks @tensho
+
 ### 1.3.4 (2017-05-28)
 
 - [#55](https://github.com/spovich/mandrill_dm/pull/55) Set default ip pool and override with each message, thanks @dorongutman

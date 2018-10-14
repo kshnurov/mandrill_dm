@@ -227,16 +227,11 @@ module MandrillDm
       Mail::Address.new(address.first)
     end
 
-    # Returns an array of values e.g. merge_vars or gobal_merge_vars
-    # `mail[:merge_vars].value` returns the variables pre-processed,
-    # `instance_variable_get('@value')` returns them exactly as they were passed in
     def get_value(field)
-      return nil unless mail[field]
-
-      if mail[field].instance_variable_defined?('@unparsed_value')
-        mail[field].instance_variable_get('@unparsed_value') # mail gem 2.7+
-      else
-        mail[field].instance_variable_get('@value') # mail gem <= 2.6
+      if mail[field].respond_to?(:unparsed_value)            # 'mail' gem >= 2.7.1
+        mail[field].unparsed_value
+      elsif mail[field].instance_variable_defined?('@value') # 'mail' gem < 2.7.1
+        mail[field].instance_variable_get('@value')
       end
     end
 

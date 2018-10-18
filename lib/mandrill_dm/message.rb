@@ -229,11 +229,11 @@ module MandrillDm
 
     # rubocop:disable Metrics/AbcSize
     def get_value(field)
-      if mail[field].respond_to?(:unparsed_value)                     # `mail` gem 2.7.1
+      if mail[field].respond_to?(:unparsed_value)                     # `mail` gem > 2.7.0
         mail[field].unparsed_value
-      elsif mail[field].instance_variable_defined?('@unparsed_value') # `mail` gem 2.7.0
+      elsif mail[field].instance_variable_defined?('@unparsed_value') # `mail` gem = 2.7.0
         mail[field].instance_variable_get('@unparsed_value')
-      elsif mail[field].instance_variable_defined?('@value')          # `mail` gem 2.6+
+      elsif mail[field].instance_variable_defined?('@value')          # `mail` gem < 2.7.0
         mail[field].instance_variable_get('@value')
       end
     end

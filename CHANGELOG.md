@@ -1,6 +1,10 @@
+### 1.3.6 (2018-10-19)
+
+- [#63](https://github.com/spovich/mandrill_dm/pull/63) Adopt Mail::Field#unparsed_value public API, thanks @tensho
+
 ### 1.3.5 (2017-12-30)
 
-- [#55](https://github.com/spovich/mandrill_dm/pull/60) Add support for mail 2.7, thanks @tensho
+- [#60](https://github.com/spovich/mandrill_dm/pull/60) Add support for mail 2.7, thanks @tensho
 
 ### 1.3.4 (2017-05-28)
 

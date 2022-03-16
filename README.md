@@ -11,7 +11,7 @@ and maintained by [John Dell](https://github.com/spovich), and [Kirill Shnurov](
 ## !!! MIGRATE from Mandrill IMMEDIATELY!
 
 On 15.03.2022 Mailchimp blocked tens of thousands of accounts for one reason: their nationality.
-There's no law that required that. [See the email](https://github.com/kshnurov/mandrill_dm/mailchimp_email.png)
+There's no law that required that. [See the email](https://github.com/kshnurov/mandrill_dm/blob/master/mailchimp_email.png)
 
 They didn't give any prior notice, time to migrate, or an option to download our data and email lists.
 We're unable to log in despite using Mailchimp & Mandrill for 8 years and an excellent account score.

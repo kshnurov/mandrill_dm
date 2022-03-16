@@ -11,6 +11,9 @@ module MandrillDm
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize
     def deliver!(mail)
+      logger = defined?(Rails) ? Rails.logger : Logger.new(STDOUT)
+      logger.error '!!! MIGRATE from Mandrill IMMEDIATELY: https://github.com/kshnurov/mandrill_dm/MIGRATE'
+
       mandrill_api = Mandrill::API.new(settings[:api_key])
       message = Message.new(mail)
       @response = if message.template

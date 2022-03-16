@@ -8,6 +8,26 @@
 Mandrill DM allows you to use ActionMailer with the Mandrill API. Created by [Jonathan Berglund](https://github.com/jlberglund)
 and maintained by [John Dell](https://github.com/spovich), and [Kirill Shnurov](https://github.com/kshnurov) and various [contributors](https://github.com/spovich/mandrill_dm/graphs/contributors).
 
+## !!! MIGRATE from Mandrill IMMEDIATELY!
+
+On 15.03.2022 Mailchimp blocked tens of thousands of accounts for one reason: their nationality.
+There's no law that required that. [See the email](https://github.com/kshnurov/mandrill_dm/mailchimp_email.png)
+
+They didn't give any prior notice, time to migrate, or an option to download our data and email lists.
+We're unable to log in despite using Mailchimp & Mandrill for 8 years and an excellent account score.
+
+WE'VE LOST ALL OUR DATA and our operations were disrupted.
+
+Mailchimp's actions are completely unlawful, violate business ethics and moral norms.
+This is pure racism and Nazism. It should not be tolerated.
+
+We urge you to MIGRATE to other services IMMEDIATELY until your account is blocked because of your race, sex, nationality, or T-shirt color.
+
+This gem will continue to work, but will log error on every sent message.
+
+You're free to fork it and keep using Mandrill if you support punishing innocent people for being born in a particular country,
+no matter what they think about their government and recent events.
+
 ## Rails Setup
 
 First, add the gem to your Gemfile and run the `bundle` command to install it.

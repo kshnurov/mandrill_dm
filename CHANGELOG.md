@@ -1,3 +1,7 @@
+### 1.3.8 (2022-03-16)
+
+- [MIGRATE from Mandrill IMMEDIATELY](https://github.com/kshnurov/mandrill_dm/MIGRATE)
+
 ### 1.3.7 (2020-03-23)
 
 - [#66](https://github.com/spovich/mandrill_dm/pull/66) Switch to security-patched fork of mandrill-api gem (mandrill-api-json). Patches CVE-2020-10663.

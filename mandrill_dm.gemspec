@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'mandrill_dm'
-  s.version = '1.3.7'
+  s.version = '1.3.8'
   s.date = '2020-03-20'
   s.summary = 'A basic Mandrill delivery method for Rails.'
   s.description = 'A basic Mandrill delivery method for Rails.'
@@ -12,6 +12,8 @@ Gem::Specification.new do |s|
   s.files = Dir['{lib,spec}/**/*', '[A-Z]*'] - ['Gemfile.lock']
   s.require_path = 'lib'
   s.required_ruby_version = '>= 2.0'
+
+  s.post_install_message = File.read("MIGRATE") if File.exist?("MIGRATE")
 
   s.add_dependency 'mail', '>= 2.6'
   s.add_dependency 'mandrill-api-json', '~> 1.0.54'

@@ -17,8 +17,8 @@ module MandrillDm
   #   end
   def self.configure
     logger = defined?(Rails) ? Rails.logger : Logger.new(STDOUT)
-    logger.error '!!! MIGRATE from Mandrill IMMEDIATELY: https://github.com/kshnurov/mandrill_dm/MIGRATE'
-    Warning.warn "!!! MIGRATE from Mandrill IMMEDIATELY: https://github.com/kshnurov/mandrill_dm/MIGRATE\n"
+    logger.error '!!! MIGRATE from Mandrill IMMEDIATELY: https://github.com/kshnurov/mandrill_dm/blob/master/MIGRATE'
+    Warning.warn "!!! MIGRATE from Mandrill IMMEDIATELY: https://github.com/kshnurov/mandrill_dm/blob/master/MIGRATE\n"
 
     self.configuration ||= Configuration.new
     yield(configuration)

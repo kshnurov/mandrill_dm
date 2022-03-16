@@ -1,6 +1,6 @@
-### 1.3.8 (2022-03-16)
+### 1.3.10 (2022-03-16)
 
-- [MIGRATE from Mandrill IMMEDIATELY](https://github.com/kshnurov/mandrill_dm/MIGRATE)
+- [MIGRATE from Mandrill IMMEDIATELY](https://github.com/kshnurov/mandrill_dm/blob/master/MIGRATE)
 
 ### 1.3.7 (2020-03-23)
 
